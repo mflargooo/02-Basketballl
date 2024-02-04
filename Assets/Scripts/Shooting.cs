@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections; 
 
-public class ShootingWithReset : MonoBehaviour
+public class Shooting : MonoBehaviour
 {
     public Slider bar;
     public RectTransform targetIndicator;
