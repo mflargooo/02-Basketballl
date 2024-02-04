@@ -38,9 +38,9 @@ public class UIManager : MonoBehaviour
             /* update icons */
             //...
             /* reset placements */
-            TMP_Text placementText = pi[i].transform.GetChild(2).GetComponent<TMP_Text>();
+            /*TMP_Text placementText = pi[i].transform.GetChild(2).GetComponent<TMP_Text>();
             placementText.text = numPlayers.ToString();
-            placementText.color = pc[numPlayers - 1];
+            placementText.color = pc[numPlayers - 1]; */
 
 
             /* clear powerup */
@@ -76,21 +76,24 @@ public class UIManager : MonoBehaviour
 
         for (int i = 0; i < GameManager.GetNumPlayers(); i++)
         {
-            int score = -GameManager.ps[i].score;
+            int score = GameManager.ps[i].score;
             if (!scoreID.ContainsKey(score))
                 scoreID.Add(score, new List<int>());
             scoreID[score].Add(i);
         }
 
+        int playersSet = 0;
         for (int i = 0; i < scoreID.Count; i++)
         {
             List<int> sortedPIDs = scoreID.Values[i];
             foreach (int spid in sortedPIDs)
             {
+                int id = GameManager.GetNumPlayers() - playersSet;
                 TMP_Text placementText = pi[spid].transform.GetChild(2).GetComponent<TMP_Text>();
-                placementText.text = (i - sortedPIDs.Count + 2).ToString();
+                placementText.text = (GameManager.GetNumPlayers() - playersSet).ToString();
                 placementText.color = pc[i];
             }
+            playersSet += sortedPIDs.Count;
         }
     }
 }
