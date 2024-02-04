@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     private static GameObject[] pi;
     private static Color[] pc;
 
-    private void Start()
+    private void Awake()
     {
         pi = playerIcons;
         pc = placementColors;
@@ -47,14 +47,12 @@ public class UIManager : MonoBehaviour
             pi[i].transform.GetChild(3).GetComponent<Image>().sprite = null /* replace w/ empty image */;
 
             /* reset score */
-            pi[i].transform.GetChild(4).GetComponent<TMP_Text>().text = "Score: 0";
-
+            UpdateScore(i, 0);
         }
     }
 
     public static void UpdateEggs(int pid, int numEggs)
     {
-        print(pid.ToString() + ", " + numEggs.ToString());
         Transform eggs = pi[pid].transform.GetChild(0);
         for (int i = 0; i < numEggs; i++)
         {
@@ -63,6 +61,36 @@ public class UIManager : MonoBehaviour
         for (int i = numEggs; i < GameManager.GetMaxEggCount(); i++)
         {
             eggs.GetChild(i).gameObject.SetActive(false);
+        }
+    }
+
+    public static void UpdateScore(int pid, int score)
+    {
+        pi[pid].transform.GetChild(4).GetComponent<TMP_Text>().text = "Score: " + score.ToString();
+        UpdatePlacements();
+    }
+
+    private static void UpdatePlacements()
+    {
+        SortedList<int, List<int>> scoreID = new SortedList<int, List<int>>();
+
+        for (int i = 0; i < GameManager.GetNumPlayers(); i++)
+        {
+            int score = -GameManager.ps[i].score;
+            if (!scoreID.ContainsKey(score))
+                scoreID.Add(score, new List<int>());
+            scoreID[score].Add(i);
+        }
+
+        for (int i = 0; i < scoreID.Count; i++)
+        {
+            List<int> sortedPIDs = scoreID.Values[i];
+            foreach (int spid in sortedPIDs)
+            {
+                TMP_Text placementText = pi[spid].transform.GetChild(2).GetComponent<TMP_Text>();
+                placementText.text = (i - sortedPIDs.Count + 2).ToString();
+                placementText.color = pc[i];
+            }
         }
     }
 }

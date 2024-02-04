@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Egg
+  - Basketball
   layers:
   - Default
   - TransparentFX
@@ -12,8 +13,8 @@ TagManager:
   - Highlighted Object
   - Water
   - UI
-  - 
-  - 
+  - IgnorePlayerCollision
+  - Player
   - 
   - 
   - 
