@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     [Min(min: 1)]
     [SerializeField] private float shootPower = 1;
 
-    [SerializeField] private PlayerStats ps;
+    [SerializeField] private int playerID;
     [SerializeField] private GameObject hoop;
     [SerializeField] private GameObject ballPrefab;
     private Rigidbody rb;
@@ -35,17 +35,26 @@ public class PlayerController : MonoBehaviour
 
         rb.velocity = input.normalized * moveSpeed;
 
-        if (Input.GetKeyDown(KeyCode.Space) && ps.eggCt > 0)
+        if (Input.GetKeyDown(KeyCode.Space) && GameManager.ps[playerID].eggCt > 0)
         {
             ShootAt();
-            UIManager.UpdateEggs(ps.id, --ps.eggCt);
+            UIManager.UpdateEggs(GameManager.ps[playerID].id, --GameManager.ps[playerID].eggCt);
         }
     }
 
     void ShootAt()
     {
         Projectile ball = Instantiate(ballPrefab, transform.position, transform.rotation).GetComponent<Projectile>();
-        ball.LaunchAt(ps.id, hoop, shootPower);
+        ball.LaunchAt(GameManager.ps[playerID].id, hoop.transform.position, shootPower);
+    }
+
+    void ShootMiss()
+    {
+        Projectile ball = Instantiate(ballPrefab, transform.position, transform.rotation).GetComponent<Projectile>();
+        float angle = Random.Range(0f, 360f);
+        Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
+        ball.LaunchAt(GameManager.ps[playerID].id, hoop.transform.position + offset, shootPower);
+        ball.tag = "Untagged";
     }
 }
 

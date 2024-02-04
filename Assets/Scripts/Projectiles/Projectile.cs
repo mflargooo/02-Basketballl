@@ -14,10 +14,10 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    public void LaunchAt(int pid, GameObject target, float launchStrength)
+    public void LaunchAt(int pid, Vector3 target, float launchStrength)
     {
         whoShot = pid;
-        Vector3 displacement = (target.transform.position - transform.position);
+        Vector3 displacement = (target - transform.position);
         Vector3 horzDisplacement = new Vector3(displacement.x, 0f, displacement.z);
 
         startDistance = horzDisplacement.magnitude;

@@ -7,9 +7,11 @@ public class Shooting : MonoBehaviour
     public Slider bar;
     public RectTransform targetIndicator;
     public GameObject successUI;
-    private float acceleration = 0f; 
+    private float acceleration = 0f;
+    [SerializeField] private float accelGrowRate = 1f;
     private float targetValue = 0.5f;
     private bool isPressing = false;
+    private bool hasPlayed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -20,27 +22,27 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !hasPlayed)
         {
+            hasPlayed = true;
             isPressing = true;
             acceleration = 0f; // reset acc
+            bar.gameObject.SetActive(true);
         }
-
-        if (Input.GetKeyUp(KeyCode.Space))
+        else if(Input.GetKeyUp(KeyCode.Space))
         {
             isPressing = false;
         }
 
         if (isPressing)
         {
-            acceleration += Time.deltaTime; 
+            acceleration += Time.deltaTime * accelGrowRate; 
             bar.value += acceleration * Time.deltaTime; 
         }
         else if (acceleration > 0)
         {
-      
             bar.value += acceleration * Time.deltaTime;
-            acceleration *= 0.9f; 
+            acceleration *= 0.8f; 
 
             if (acceleration < 0.01f)
             {
@@ -53,7 +55,9 @@ public class Shooting : MonoBehaviour
     void ResetGame()
     {
         bar.value = 0;
+        bar.gameObject.SetActive(false);
         SetTargetValue();
+        hasPlayed = false;
         successUI.SetActive(false);
     }
 
