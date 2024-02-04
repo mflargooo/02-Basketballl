@@ -86,14 +86,13 @@ public class UIManager : MonoBehaviour
         for (int i = 0; i < scoreID.Count; i++)
         {
             List<int> sortedPIDs = scoreID.Values[i];
+            playersSet += sortedPIDs.Count;
             foreach (int spid in sortedPIDs)
             {
-                int id = GameManager.GetNumPlayers() - playersSet;
                 TMP_Text placementText = pi[spid].transform.GetChild(2).GetComponent<TMP_Text>();
-                placementText.text = (GameManager.GetNumPlayers() - playersSet).ToString();
-                placementText.color = pc[i];
+                placementText.text = (GameManager.GetNumPlayers() - playersSet + 1).ToString();
+                placementText.color = pc[GameManager.GetNumPlayers() - playersSet];
             }
-            playersSet += sortedPIDs.Count;
         }
     }
 }
