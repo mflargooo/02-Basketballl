@@ -13,12 +13,15 @@ public class GameManager : MonoBehaviour
     [SerializeField] private PlayerStats[] playerStats;
 
     public static PlayerStats[] ps;
+    [SerializeField] private Color[] playerColors;
+    public static Color[] pc;
 
     // Start is called before the first frame update
     void Start()
     {
         mcEggs = maxCarryEggs;
         ps = playerStats;
+        pc = playerColors;
         NewGame(numPlayers); /* this will get removed when we have a menu that starts the game -- maybe */
     }
 

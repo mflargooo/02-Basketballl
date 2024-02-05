@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class Collect : MonoBehaviour
 {
-    [SerializeField] private PlayerStats ps;
+    [SerializeField] private int playerID;
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Egg" && ps.eggCt < GameManager.GetMaxEggCount())
+        if (other.gameObject.tag == "Egg" && GameManager.ps[playerID].eggCt < GameManager.GetMaxEggCount())
         {
-            UIManager.UpdateEggs(ps.id, ++ps.eggCt);
+            UIManager.UpdateEggs(GameManager.ps[playerID].id, ++GameManager.ps[playerID].eggCt);
             /* collect egg sound */
             Destroy(other.gameObject);
         }
         else if (other.gameObject.tag == "Powerup")
         {
             /*powerup pickup sound*/
-            ps.powerupID = -1 /*need powerup id system*/;
+            GameManager.ps[playerID].powerupID = -1 /*need powerup id system*/;
         }
     }
 }

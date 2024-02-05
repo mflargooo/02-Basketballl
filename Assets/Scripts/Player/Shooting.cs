@@ -1,28 +1,42 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
-using System.Collections; 
+using TMPro;
 
 public class Shooting : MonoBehaviour
 {
+    [SerializeField] private PlayerController pc;
+    [SerializeField] private Rigidbody rb;
+    [SerializeField] private int playerID;
     public Slider bar;
     public RectTransform targetIndicator;
-    public GameObject successUI;
+    [SerializeField] private TMP_Text shotText;
     private float acceleration = 0f;
     [SerializeField] private float accelGrowRate = 1f;
     private float targetValue = 0.5f;
     private bool isPressing = false;
     private bool hasPlayed = false;
 
+    [Min(min: 1)]
+    [SerializeField] private float shootPower = 1;
+    [SerializeField] private GameObject hoop;
+    [SerializeField] private Transform scoreZone;
+    [SerializeField] private GameObject ballPrefab;
+    
+    private float maxShootDist;
+
     // Start is called before the first frame update
     void Start()
     {
+        maxShootDist = hoop.GetComponent<ScoreManager>().GetMaxShootDist();
         ResetGame();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !hasPlayed)
+        Vector3 horzDisp = new Vector3(hoop.transform.position.x - transform.position.x, 0f, hoop.transform.position.z - transform.position.z);
+        if (horzDisp.magnitude <= maxShootDist && Input.GetKeyDown(KeyCode.Space) && GameManager.ps[playerID].eggCt > 0 && !hasPlayed)
         {
             hasPlayed = true;
             isPressing = true;
@@ -52,13 +66,28 @@ public class Shooting : MonoBehaviour
         }
     }
 
+    void ShootAt()
+    {
+        Projectile ball = Instantiate(ballPrefab, transform.position, transform.rotation).GetComponent<Projectile>();
+        ball.LaunchAt(GameManager.ps[playerID].id, scoreZone.position, shootPower);
+    }
+
+    void ShootMiss()
+    {
+        Projectile ball = Instantiate(ballPrefab, transform.position, transform.rotation).GetComponent<Projectile>();
+        float angle = Random.Range(0f, 360f);
+        Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
+        ball.LaunchAt(GameManager.ps[playerID].id, scoreZone.position + offset, shootPower);
+        ball.tag = "Untagged";
+    }
+
     void ResetGame()
     {
         bar.value = 0;
         bar.gameObject.SetActive(false);
         SetTargetValue();
         hasPlayed = false;
-        successUI.SetActive(false);
+        shotText.gameObject.SetActive(false);
     }
 
     void SetTargetValue()
@@ -78,21 +107,24 @@ public class Shooting : MonoBehaviour
 
     void CheckSuccess()
     {
-
+        UIManager.UpdateEggs(GameManager.ps[playerID].id, --GameManager.ps[playerID].eggCt);
         if (Mathf.Abs(bar.value - targetValue) < 0.05f) 
         {
-            StartCoroutine(ShowSuccessAndReset());
+            ShootAt();
+            StartCoroutine(ShowTextAndReset("Success!"));
         }
         else
         {
-            ResetGame();
+            ShootMiss();
+            StartCoroutine(ShowTextAndReset("Miss!"));
         }
     }
 
-    IEnumerator ShowSuccessAndReset()
+    IEnumerator ShowTextAndReset(string text)
     {
-        successUI.SetActive(true);
-        yield return new WaitForSeconds(1);
+        shotText.text = text;
+        shotText.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
         ResetGame();
     }
 }

@@ -7,11 +7,14 @@ public class Projectile : MonoBehaviour
     private Rigidbody rb;
     private int whoShot;
     private float startDistance;
+    [SerializeField] private float delayDestroyTime;
+    [SerializeField] private float disappearTime;
 
     // Start is called before the first frame update
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        StartCoroutine(Disappear(delayDestroyTime, disappearTime));
     }
 
     public void LaunchAt(int pid, Vector3 target, float launchStrength)
@@ -44,5 +47,20 @@ public class Projectile : MonoBehaviour
     public float GetStartDistance()
     {
         return startDistance;
+    }
+
+    public IEnumerator Disappear(float delay, float time)
+    {
+        yield return new WaitForSeconds(delay);
+        float startTime = time;
+        Vector3 startScale = transform.localScale;
+        while(time > 0)
+        {
+            time -= Time.deltaTime;
+            transform.localScale = startScale * (time / startTime);
+            yield return null;
+        }
+
+        Destroy(gameObject);
     }
 }
