@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -11,7 +9,6 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private float largeRingRadius;
 
     [SerializeField] private GameObject[] rings;
-    [SerializeField] private ParticleSystem successParticles;
 
     private void Start()
     {
@@ -37,10 +34,6 @@ public class ScoreManager : MonoBehaviour
             int pid = ball.GetWhoShot();
             GameManager.ps[pid].score += pts;
             UIManager.UpdateScore(pid, GameManager.ps[pid].score);
-
-            ParticleSystem.MainModule main = successParticles.main;
-            main.startColor = GameManager.pc[pid];
-            successParticles.Play();
             Destroy(ball.gameObject, .1f);
         }
     }

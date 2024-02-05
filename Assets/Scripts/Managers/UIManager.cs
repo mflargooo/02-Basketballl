@@ -38,9 +38,9 @@ public class UIManager : MonoBehaviour
             /* update icons */
             //...
             /* reset placements */
-            /*TMP_Text placementText = pi[i].transform.GetChild(2).GetComponent<TMP_Text>();
+            /*TMP_Text placementText = playerIcons[i].transform.GetChild(2).GetComponent<TMP_Text>();
             placementText.text = numPlayers.ToString();
-            placementText.color = pc[numPlayers - 1]; */
+            placementText.color = placementColors[numPlayers - 1]; */
 
 
             /* clear powerup */

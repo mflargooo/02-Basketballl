@@ -16,6 +16,8 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Color[] playerColors;
     public static Color[] pc;
 
+    [SerializeField] private UIManager uiManager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,13 +27,13 @@ public class GameManager : MonoBehaviour
         NewGame(numPlayers); /* this will get removed when we have a menu that starts the game -- maybe */
     }
 
-    public static void NewGame(int playerCount)
+    public void NewGame(int playerCount)
     {
         numPlayers = playerCount;
         ResetPlayers();
         UIManager.SetupUI();
     }
-    private static void ResetPlayers()
+    private void ResetPlayers()
     {
         for (int i = 0; i < 4; i++)
         {

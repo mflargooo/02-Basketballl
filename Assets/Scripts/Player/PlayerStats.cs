@@ -2,8 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Player Stats", menuName = "Stats/Player Stats")]
-public class PlayerStats : ScriptableObject
+public class PlayerStats : MonoBehaviour
 {
     public int placement = 4;
     public int score = 0;

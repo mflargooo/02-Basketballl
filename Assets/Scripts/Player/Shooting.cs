@@ -22,6 +22,8 @@ public class Shooting : MonoBehaviour
     [SerializeField] private GameObject hoop;
     [SerializeField] private Transform scoreZone;
     [SerializeField] private GameObject ballPrefab;
+
+    [SerializeField] private UIManager uiManager;
     
     private float maxShootDist;
 
