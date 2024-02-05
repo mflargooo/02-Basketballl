@@ -110,7 +110,11 @@ public class Shooting : MonoBehaviour
     void CheckSuccess()
     {
         UIManager.UpdateEggs(GameManager.ps[playerID].id, --GameManager.ps[playerID].eggCt);
-        if (Mathf.Abs(bar.value - targetValue) < 0.05f) 
+
+        float successRangeStart = targetValue - 0.15625f;
+        float successRangeEnd = targetValue + 0.15625f;
+
+        if (bar.value >= successRangeStart && bar.value <= successRangeEnd) 
         {
             ShootAt();
             StartCoroutine(ShowTextAndReset("Success!"));
