@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class Collect : MonoBehaviour
 {
-    [SerializeField] private int playerID;
-    [SerializeField] private UIManager uiManager;
+    private int playerID;
+    private void Start()
+    {
+        playerID = GetComponent<PlayerController>().GetPlayerID();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Egg" && GameManager.ps[playerID].GetComponent<PlayerStats>().eggCt < GameManager.GetMaxEggCount())

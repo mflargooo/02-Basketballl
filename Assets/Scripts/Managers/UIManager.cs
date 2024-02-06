@@ -9,29 +9,33 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] playerIcons;
     [SerializeField] private Color[] placementColors;
 
+    [SerializeField] private TMP_Text timerText;
+
     private static GameObject[] pi;
     private static Color[] pc;
+    private static TMP_Text tt;
 
     private void Awake()
     {
         pi = playerIcons;
         pc = placementColors;
+        tt = timerText;
+
+        foreach (GameObject p in pi) p.SetActive(false);
     }
 
     public static void SetupUI()
     {
-        int numPlayers = GameManager.GetNumPlayers();
-
-        int width = Screen.width;
+        /*int width = Screen.width;
         int deltaW = width / (numPlayers + 1);
         for (int i = 0; i < numPlayers; i++)
         {
             RectTransform icon = pi[i].GetComponent<RectTransform>();
             icon.position = new Vector3(deltaW * (i + 1), icon.position.y, icon.position.z);
             icon.gameObject.SetActive(true);
-        }
+        }*/
 
-        for (int i = 0; i < numPlayers; i++)
+        for (int i = 0; i < 4; i++)
         {
             /*reset egg icons*/
             UpdateEggs(i, 0);
@@ -94,5 +98,15 @@ public class UIManager : MonoBehaviour
                 placementText.color = pc[GameManager.GetNumPlayers() - playersSet];
             }
         }
+    }
+
+    public static void UpdateClock(float time)
+    {
+        tt.text = ((int) time).ToString();
+    }
+
+    public static void EnablePlayer(int pid)
+    {
+        pi[pid].SetActive(true);
     }
 }

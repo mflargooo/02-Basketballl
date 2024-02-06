@@ -38,8 +38,8 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public float GetMaxShootDist()
+    public float[] GetShootRanges()
     {
-        return largeRingRadius + .25f;
+        return new float[3] { smallRingRadius - .125f, medRingRadius - .125f, largeRingRadius + .25f };
     }
 }

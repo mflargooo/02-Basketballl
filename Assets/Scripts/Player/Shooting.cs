@@ -7,11 +7,12 @@ public class Shooting : MonoBehaviour
 {
     [SerializeField] private PlayerController pc;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private int playerID;
+    private int playerID;
     public Slider bar;
     public RectTransform targetIndicator;
     [SerializeField] private TMP_Text shotText;
     private float acceleration = 0f;
+    [SerializeField] private float maxAcceleration;
     [SerializeField] private float accelGrowRate = 1f;
     private float targetValue = 0.5f;
     private bool isPressing = false;
@@ -23,14 +24,16 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Transform scoreZone;
     [SerializeField] private GameObject ballPrefab;
 
-    [SerializeField] private UIManager uiManager;
-    
-    private float maxShootDist;
+    private float[] shootRanges;
+    bool attemptingShot;
 
     // Start is called before the first frame update
     void Start()
     {
-        maxShootDist = hoop.GetComponent<ScoreManager>().GetMaxShootDist();
+        playerID = GetComponent<PlayerController>().GetPlayerID();
+        ScoreManager sm = hoop.GetComponent<ScoreManager>();
+        shootRanges = sm.GetShootRanges();
+        shotText.gameObject.SetActive(false);
         ResetGame();
     }
 
@@ -38,32 +41,45 @@ public class Shooting : MonoBehaviour
     void Update()
     {
         Vector3 horzDisp = new Vector3(hoop.transform.position.x - transform.position.x, 0f, hoop.transform.position.z - transform.position.z);
-        if (horzDisp.magnitude <= maxShootDist && Input.GetKeyDown(KeyCode.Space) && GameManager.ps[playerID].eggCt > 0 && !hasPlayed)
+       
+        float multiplier = 1;
+        if (horzDisp.magnitude <= shootRanges[2] && attemptingShot && GameManager.ps[playerID].eggCt > 0 && !hasPlayed && !pc.IsDashing() && pc.GetCanMove())
         {
+            UIManager.UpdateEggs(GameManager.ps[playerID].id, --GameManager.ps[playerID].eggCt);
+            pc.DisableMovement();
+
+            if (horzDisp.magnitude < shootRanges[0]) multiplier = 3;
+            else if (horzDisp.magnitude < shootRanges[1]) multiplier = 2;
+
             hasPlayed = true;
             isPressing = true;
             acceleration = 0f; // reset acc
+            SetTargetValue(multiplier);
             bar.gameObject.SetActive(true);
         }
-        else if(Input.GetKeyUp(KeyCode.Space))
-        {
-            isPressing = false;
-        }
 
-        if (isPressing)
+        if (isPressing && attemptingShot)
         {
-            acceleration += Time.deltaTime * accelGrowRate; 
+            rb.velocity = Vector3.zero;
+            transform.Rotate(Vector3.up * Vector3.SignedAngle(transform.forward, horzDisp, Vector3.up) * Time.deltaTime * 6f);
+            if (bar.value >= 1f && acceleration > 0 || bar.value <= 0f && acceleration < 0f)
+            {
+                acceleration = -acceleration;
+                accelGrowRate = -accelGrowRate;
+            }
+            acceleration = Mathf.Clamp(acceleration + Time.deltaTime * accelGrowRate, -maxAcceleration, maxAcceleration); 
             bar.value += acceleration * Time.deltaTime; 
         }
-        else if (acceleration > 0)
+        else if (Mathf.Abs(acceleration) > 0 && isPressing)
         {
+            isPressing = false;
             bar.value += acceleration * Time.deltaTime;
             acceleration *= 0.8f; 
 
-            if (acceleration < 0.01f)
+            if (Mathf.Abs(acceleration) < 0.01f)
             {
-                acceleration = 0f; 
-                CheckSuccess(); 
+                acceleration = 0f;
+                CheckSuccess();
             }
         }
     }
@@ -87,21 +103,21 @@ public class Shooting : MonoBehaviour
     {
         bar.value = 0;
         bar.gameObject.SetActive(false);
-        SetTargetValue();
         hasPlayed = false;
         shotText.gameObject.SetActive(false);
     }
 
-    void SetTargetValue()
+    void SetTargetValue(float multiplier)
     {
-        targetValue = Random.Range(0.25f, 1f); 
-        UpdateTargetIndicatorPosition();
+        targetValue = Random.Range(0.25f, .85f); 
+        UpdateTargetIndicatorPosition(multiplier);
     }
 
-    void UpdateTargetIndicatorPosition()
+    void UpdateTargetIndicatorPosition(float multiplier)
     {
         if (bar != null && targetIndicator != null)
         {
+            targetIndicator.sizeDelta = new Vector2(targetIndicator.sizeDelta.x, 10 * multiplier);
             float targetPos = targetValue * bar.GetComponent<RectTransform>().sizeDelta.x;
             targetIndicator.anchoredPosition = new Vector2(targetPos - bar.GetComponent<RectTransform>().sizeDelta.x * 0.5f, targetIndicator.anchoredPosition.y);
         }
@@ -109,10 +125,8 @@ public class Shooting : MonoBehaviour
 
     void CheckSuccess()
     {
-        UIManager.UpdateEggs(GameManager.ps[playerID].id, --GameManager.ps[playerID].eggCt);
-
-        float successRangeStart = targetValue - 0.15625f;
-        float successRangeEnd = targetValue + 0.15625f;
+        float successRangeStart = targetValue - targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f - .01f;
+        float successRangeEnd = targetValue + targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f + .01f;
 
         if (bar.value >= successRangeStart && bar.value <= successRangeEnd) 
         {
@@ -128,9 +142,24 @@ public class Shooting : MonoBehaviour
 
     IEnumerator ShowTextAndReset(string text)
     {
+        bar.gameObject.SetActive(false);
+        pc.EnableMovement();
         shotText.text = text;
         shotText.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
+        shotText.gameObject.SetActive(false);
+        ResetGame();
+    }
+
+    public void SetAttemptingShot(float pressedAmount)
+    {
+        attemptingShot = pressedAmount != 0;
+    }
+
+    public void InterruptGame()
+    {
+        isPressing = false;
+        acceleration = 0f;
         ResetGame();
     }
 }
