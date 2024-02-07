@@ -70,7 +70,7 @@ public class Shooting : MonoBehaviour
             acceleration = Mathf.Clamp(acceleration + Time.deltaTime * accelGrowRate, -maxAcceleration, maxAcceleration); 
             bar.value += acceleration * Time.deltaTime; 
         }
-        else if (Mathf.Abs(acceleration) > 0 && isPressing)
+        else if (Mathf.Abs(acceleration) > 0)
         {
             isPressing = false;
             bar.value += acceleration * Time.deltaTime;
@@ -117,7 +117,7 @@ public class Shooting : MonoBehaviour
     {
         if (bar != null && targetIndicator != null)
         {
-            targetIndicator.sizeDelta = new Vector2(targetIndicator.sizeDelta.x, 10 * multiplier);
+            targetIndicator.sizeDelta = new Vector2(targetIndicator.sizeDelta.x, 12.5f * multiplier);
             float targetPos = targetValue * bar.GetComponent<RectTransform>().sizeDelta.x;
             targetIndicator.anchoredPosition = new Vector2(targetPos - bar.GetComponent<RectTransform>().sizeDelta.x * 0.5f, targetIndicator.anchoredPosition.y);
         }
@@ -125,8 +125,9 @@ public class Shooting : MonoBehaviour
 
     void CheckSuccess()
     {
-        float successRangeStart = targetValue - targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f - .01f;
-        float successRangeEnd = targetValue + targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f + .01f;
+
+        float successRangeStart = targetValue - targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f - .05f;
+        float successRangeEnd = targetValue + targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f + .05f;
 
         if (bar.value >= successRangeStart && bar.value <= successRangeEnd) 
         {

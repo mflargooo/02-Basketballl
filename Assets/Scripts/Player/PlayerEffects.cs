@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerEffects : MonoBehaviour
 {
     [SerializeField] private GameObject[] model;
-    [SerializeField] private MonoBehaviour[] disableOnStun;
     private Rigidbody rb;
     private PlayerController pc;
     private Shooting sh;
@@ -36,8 +35,6 @@ public class PlayerEffects : MonoBehaviour
             sh.InterruptGame();
             pc.DisableMovement();
             /*stun anim*/
-            foreach (MonoBehaviour script in disableOnStun)
-                script.enabled = false;
             while (st > stunTime - .2f)
             {
                 rb.velocity = dir * stunKnockbackVelocity;
@@ -47,8 +44,6 @@ public class PlayerEffects : MonoBehaviour
             rb.velocity = Vector2.zero;
             yield return new WaitForSeconds(stunTime - .2f);
             yield return null;
-            foreach (MonoBehaviour script in disableOnStun)
-                script.enabled = true;
             pc.EnableMovement();
             /*stop stun anim*/
         }
