@@ -27,6 +27,8 @@ public class Shooting : MonoBehaviour
     private float[] shootRanges;
     bool attemptingShot;
 
+    bool skipThisGame;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +47,6 @@ public class Shooting : MonoBehaviour
         float multiplier = 1;
         if (horzDisp.magnitude <= shootRanges[2] && attemptingShot && GameManager.ps[playerID].eggCt > 0 && !hasPlayed && !pc.IsDashing() && pc.GetCanMove())
         {
-            UIManager.UpdateEggs(GameManager.ps[playerID].id, --GameManager.ps[playerID].eggCt);
             pc.DisableMovement();
 
             if (horzDisp.magnitude < shootRanges[0]) multiplier = 3;
@@ -105,6 +106,7 @@ public class Shooting : MonoBehaviour
         bar.gameObject.SetActive(false);
         hasPlayed = false;
         shotText.gameObject.SetActive(false);
+        skipThisGame = false;
     }
 
     void SetTargetValue(float multiplier)
@@ -129,16 +131,21 @@ public class Shooting : MonoBehaviour
         float successRangeStart = targetValue - targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f - .05f;
         float successRangeEnd = targetValue + targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f + .05f;
 
-        if (bar.value >= successRangeStart && bar.value <= successRangeEnd) 
+        if (!skipThisGame)
         {
-            ShootAt();
-            StartCoroutine(ShowTextAndReset("Success!"));
+            if (bar.value >= successRangeStart && bar.value <= successRangeEnd)
+            {
+                ShootAt();
+                StartCoroutine(ShowTextAndReset("Success!"));
+            }
+            else
+            {
+                ShootMiss();
+                StartCoroutine(ShowTextAndReset("Miss!"));
+            }
         }
-        else
-        {
-            ShootMiss();
-            StartCoroutine(ShowTextAndReset("Miss!"));
-        }
+
+        UIManager.UpdateEggs(GameManager.ps[playerID].id, --GameManager.ps[playerID].eggCt);
     }
 
     IEnumerator ShowTextAndReset(string text)
@@ -159,6 +166,7 @@ public class Shooting : MonoBehaviour
 
     public void InterruptGame()
     {
+        skipThisGame = true;
         isPressing = false;
         acceleration = 0f;
         ResetGame();

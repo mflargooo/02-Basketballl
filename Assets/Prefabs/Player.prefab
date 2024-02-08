@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7174050546525271728}
   - component: {fileID: 3878484353563448200}
   - component: {fileID: 7556756187694986858}
-  m_Layer: 7
+  m_Layer: 8
   m_Name: InteractColliderFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,6 +82,7 @@ GameObject:
   - component: {fileID: 3075844489239501609}
   - component: {fileID: 8672815330894053962}
   - component: {fileID: 2976119033713565404}
+  - component: {fileID: 7714726086487553537}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -231,12 +232,23 @@ MonoBehaviour:
   - {fileID: 520561292245150979}
   - {fileID: 1689520727342637720}
   - {fileID: 1436589028051378799}
-  disableOnStun:
-  - {fileID: 1791792798232922500}
   stunTime: 1
   stunKnockbackVelocity: 15
+  knockbackTime: 0.2
   invulnTime: 1
   flashTime: 0.1
+--- !u!114 &7714726086487553537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6025330378625358186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3248d6fb8dd2e4f6e887b690d0813895, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7995333629880713724
 PrefabInstance:
   m_ObjectHideFlags: 0

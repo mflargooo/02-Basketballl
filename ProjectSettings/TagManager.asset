@@ -7,6 +7,7 @@ TagManager:
   - Egg
   - Basketball
   - Powerup
+  - Undefined
   layers:
   - Default
   - TransparentFX
@@ -14,10 +15,10 @@ TagManager:
   - Highlighted Object
   - Water
   - UI
-  - IgnorePlayerCollision
+  - 
   - Player
-  - 
-  - 
+  - IgnoreBall
+  - IgnorePlayerAndBall
   - 
   - 
   - 

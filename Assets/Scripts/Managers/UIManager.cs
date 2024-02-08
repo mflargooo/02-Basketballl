@@ -26,6 +26,7 @@ public class UIManager : MonoBehaviour
 
     public static void SetupUI()
     {
+        int numPlayers = GameManager.GetNumPlayers();
         /*int width = Screen.width;
         int deltaW = width / (numPlayers + 1);
         for (int i = 0; i < numPlayers; i++)
@@ -41,11 +42,6 @@ public class UIManager : MonoBehaviour
             UpdateEggs(i, 0);
             /* update icons */
             //...
-            /* reset placements */
-            /*TMP_Text placementText = playerIcons[i].transform.GetChild(2).GetComponent<TMP_Text>();
-            placementText.text = numPlayers.ToString();
-            placementText.color = placementColors[numPlayers - 1]; */
-
 
             /* clear powerup */
             pi[i].transform.GetChild(3).GetComponent<Image>().sprite = null /* replace w/ empty image */;

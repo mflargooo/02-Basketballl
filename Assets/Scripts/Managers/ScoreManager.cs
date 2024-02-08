@@ -10,11 +10,14 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private GameObject[] rings;
 
+    private float[] shootingRanges;
     private void Start()
     {
         rings[0].transform.localScale = new Vector3(smallRingRadius * 2f, smallRingRadius * 2f, 1f);
         rings[1].transform.localScale = new Vector3(medRingRadius * 2f, medRingRadius * 2f, 1f);
         rings[2].transform.localScale = new Vector3(largeRingRadius * 2f, largeRingRadius * 2f, 1f);
+
+        shootingRanges = new float[3] { smallRingRadius - .125f, medRingRadius - .125f, largeRingRadius + .25f };
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -40,6 +43,6 @@ public class ScoreManager : MonoBehaviour
 
     public float[] GetShootRanges()
     {
-        return new float[3] { smallRingRadius - .125f, medRingRadius - .125f, largeRingRadius + .25f };
+        return shootingRanges;
     }
 }
