@@ -5,6 +5,7 @@ using UnityEngine;
 public class Collisions : MonoBehaviour
 {
     private PlayerController pc;
+
     [SerializeField] private float dashToStunAngle;
     private void Start()
     {
@@ -16,6 +17,10 @@ public class Collisions : MonoBehaviour
         if(pc.IsDashing() && Vector3.Angle(toTarget, transform.forward) < dashToStunAngle  && other.gameObject.tag == "Player")
         {
             StartCoroutine(other.gameObject.GetComponent<PlayerEffects>().Stun(transform.forward));
+            other.gameObject.GetComponent<Stealing>().stealing(transform.root.gameObject);
+
         }
     }
+
+
 }
