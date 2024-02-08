@@ -11,8 +11,8 @@ public class PlayerEffects : MonoBehaviour
 
     [Min(min: .3f)]
     [SerializeField] private float stunTime;
-    private float st;
     [SerializeField] private float stunKnockbackVelocity;
+    [SerializeField] private float knockbackTime = .2f;
     [SerializeField] private float invulnTime;
     [Min(min: .001f)]
     [SerializeField] private float flashTime;
@@ -32,14 +32,14 @@ public class PlayerEffects : MonoBehaviour
         {
             StartCoroutine(FlashModel(invulnTime + stunTime));
             StartCoroutine(Invuln(invulnTime + stunTime));
-            st = stunTime;
             sh.InterruptGame();
             pc.DisableMovement();
+            float kbTime = 0f;
             /*stun anim*/
-            while (st > stunTime - .2f)
+            while (kbTime < knockbackTime)
             {
                 rb.velocity = dir * stunKnockbackVelocity;
-                st -= Time.deltaTime;
+                kbTime += Time.deltaTime;
                 yield return null;
             }
             rb.velocity = Vector2.zero;
