@@ -11,12 +11,13 @@ public class PlayerEffects : MonoBehaviour
 
     [Min(min: .3f)]
     [SerializeField] private float stunTime;
+    private float st;
     [SerializeField] private float stunKnockbackVelocity;
     [SerializeField] private float invulnTime;
     [Min(min: .001f)]
     [SerializeField] private float flashTime;
 
-    private bool invuln;
+    public bool invuln { get; private set; }
 
     private void Start()
     {
@@ -31,7 +32,7 @@ public class PlayerEffects : MonoBehaviour
         {
             StartCoroutine(FlashModel(invulnTime + stunTime));
             StartCoroutine(Invuln(invulnTime + stunTime));
-            float st = stunTime;
+            st = stunTime;
             sh.InterruptGame();
             pc.DisableMovement();
             /*stun anim*/

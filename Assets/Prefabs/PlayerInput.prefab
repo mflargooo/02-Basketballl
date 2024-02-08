@@ -148,7 +148,7 @@ MonoBehaviour:
     m_ActionId: 8325147c-1ac9-4823-9deb-6fa650f62f79
     m_ActionName: UI/TrackedDeviceOrientation
   m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: Gamepad
+  m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}

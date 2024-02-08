@@ -10,14 +10,14 @@ public class Stealing : MonoBehaviour
         if (GameManager.ps[playerID] && GameManager.ps[playerID].GetComponent<PlayerStats>().eggCt < GameManager.GetMaxEggCount())
         {
             GameManager.ps[playerID].GetComponent<PlayerStats>().eggCt++;
-            UIManager.UpdateEggs(GameManager.ps[playerID].id, GameManager.ps[playerID].GetComponent<PlayerStats>().eggCt);
+            UIManager.UpdateEggs(playerID, GameManager.ps[playerID].GetComponent<PlayerStats>().eggCt);
         }
 
         int thisPlayerID = transform.root.GetComponent<PlayerController>().GetPlayerID();
         if (GameManager.ps[thisPlayerID] && GameManager.ps[thisPlayerID].GetComponent<PlayerStats>().eggCt > 0)
         {
             GameManager.ps[thisPlayerID].GetComponent<PlayerStats>().eggCt--;
-            UIManager.UpdateEggs(GameManager.ps[thisPlayerID].id, GameManager.ps[thisPlayerID].GetComponent<PlayerStats>().eggCt);
+            UIManager.UpdateEggs(thisPlayerID, GameManager.ps[thisPlayerID].GetComponent<PlayerStats>().eggCt);
         }
         //animation?
     }

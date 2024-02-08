@@ -14,11 +14,10 @@ public class Collisions : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         Vector3 toTarget = other.transform.position - transform.position;
-        if(pc.IsDashing() && Vector3.Angle(toTarget, transform.forward) < dashToStunAngle  && other.gameObject.tag == "Player")
+        if(pc.IsDashing() && Vector3.Angle(toTarget, transform.forward) < dashToStunAngle  && other.gameObject.tag == "Player" && !other.GetComponent<PlayerEffects>().invuln)
         {
             StartCoroutine(other.gameObject.GetComponent<PlayerEffects>().Stun(transform.forward));
             other.gameObject.GetComponent<Stealing>().stealing(transform.root.gameObject);
-
         }
     }
 
