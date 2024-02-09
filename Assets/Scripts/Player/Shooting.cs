@@ -28,11 +28,12 @@ public class Shooting : MonoBehaviour
     bool attemptingShot;
 
     bool skipThisGame;
+    bool insideSmall = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerID = GetComponent<PlayerController>().GetPlayerID();
+        playerID = pc.GetPlayerID();
         ScoreManager sm = hoop.GetComponent<ScoreManager>();
         shootRanges = sm.GetShootRanges();
         shotText.gameObject.SetActive(false);
@@ -43,7 +44,14 @@ public class Shooting : MonoBehaviour
     void Update()
     {
         Vector3 horzDisp = new Vector3(hoop.transform.position.x - transform.position.x, 0f, hoop.transform.position.z - transform.position.z);
-       
+
+        if (horzDisp.magnitude <= shootRanges[0])
+        {
+            GetComponent<PlayerEffects>().SetInvuln(true);
+            insideSmall = true;
+        }
+        else if (insideSmall) GetComponent<PlayerEffects>().SetInvuln(false);
+
         float multiplier = 1;
         if (horzDisp.magnitude <= shootRanges[2] && attemptingShot && GameManager.ps[playerID].eggCt > 0 && !hasPlayed && !pc.IsDashing() && pc.GetCanMove())
         {

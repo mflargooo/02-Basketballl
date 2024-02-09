@@ -17,6 +17,9 @@ public class PlayerEffects : MonoBehaviour
     [Min(min: .001f)]
     [SerializeField] private float flashTime;
 
+    [SerializeField] private Animator anim;
+    [SerializeField] private AnimationClip stun;
+
     public bool invuln { get; private set; }
 
     private void Start()
@@ -25,11 +28,14 @@ public class PlayerEffects : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         sh = GetComponent<Shooting>();
     }
-    public IEnumerator Stun(Vector3 dir)
+    public IEnumerator Stun(Transform hitBy)
     {
         if (invuln) yield return null;
         else 
         {
+            anim.Play(stun.name);
+            Vector3 dir = hitBy.forward;
+            transform.rotation = Quaternion.LookRotation((hitBy.position - transform.position).normalized, transform.up);
             StartCoroutine(FlashModel(invulnTime + stunTime));
             StartCoroutine(Invuln(invulnTime + stunTime));
             sh.InterruptGame();
@@ -73,5 +79,10 @@ public class PlayerEffects : MonoBehaviour
         }
         foreach (GameObject m in model)
             m.SetActive(true);
+    }
+
+    public void SetInvuln(bool b)
+    {
+        invuln = b;
     }
 }

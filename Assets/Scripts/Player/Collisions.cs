@@ -18,7 +18,7 @@ public class Collisions : MonoBehaviour
         {
             if (!other.GetComponent<PlayerEffects>().invuln)
             {
-                StartCoroutine(other.gameObject.GetComponent<PlayerEffects>().Stun(transform.forward));
+                StartCoroutine(other.gameObject.GetComponent<PlayerEffects>().Stun(transform));
                 other.gameObject.GetComponent<Stealing>().stealing(transform.root.gameObject);
             }
         }

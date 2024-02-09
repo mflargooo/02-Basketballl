@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour
     private float baseMS, dct;
 
     [SerializeField] private int playerID;
+    [SerializeField] private Animator anim;
 
     private Rigidbody rb;
 
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        anim.SetFloat("Input", input.magnitude);
         if (dct > 0f && !isDashing)
         {
             dct -= Time.deltaTime;
@@ -47,6 +49,7 @@ public class PlayerController : MonoBehaviour
         else rb.transform.Rotate(Vector3.zero);
 
         if(!isDashing) rb.velocity = input.normalized * moveSpeed;
+        anim.SetFloat("Velocity", rb.velocity.magnitude);
     }
 
     public int GetPlayerID()
@@ -79,21 +82,18 @@ public class PlayerController : MonoBehaviour
     public void DisableMovement()
     {
         canMove = false;
+        anim.SetBool("CanMove", false);
     }
 
     public void EnableMovement()
     {
         canMove = true;
+        anim.SetBool("CanMove", true);
     }
 
     public bool IsDashing()
     {
         return isDashing;
-    }
-
-    public void SetCanMove(bool b)
-    {
-        canMove = b;
     }
 
     public bool GetCanMove()

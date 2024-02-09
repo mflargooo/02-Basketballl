@@ -18,15 +18,21 @@ public class GameManager : MonoBehaviour
 
     private float gameTimer;
     bool endGame;
+
     // Start is called before the first frame update
     void Start()
     {
+        PlayerInputHandler[] pihs = FindObjectsOfType<PlayerInputHandler>();
+        foreach(PlayerInputHandler pih in pihs)
+        {
+            pih.Setup(this);
+        }
+
         gameTime += .9999f;
         mcEggs = maxCarryEggs;
         ps = playerStats;
         pc = playerColors;
-        SetNumPlayers(numPlayers);
-        NewGame(numPlayers); /* this will get removed when we have a menu that starts the game -- maybe */
+        NewGame(GameInfo.playerIndices.Count);
     }
 
     private void Update()
@@ -64,11 +70,6 @@ public class GameManager : MonoBehaviour
             ps[i].eggCt = 0;
             ps[i].powerupID = -1;
         }
-    }
-
-    public static void SetNumPlayers(int players)
-    {
-        numPlayers = players;
     }
 
     public static int GetNumPlayers()

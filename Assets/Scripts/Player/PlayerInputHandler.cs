@@ -6,14 +6,12 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    private GameManager gm;
     private PlayerInput pi;
     private PlayerController pc;
     private Shooting sh;
 
-    private void Awake()
+    public void Setup(GameManager gm)
     {
-        gm = FindObjectOfType<GameManager>();
         pi = GetComponent<PlayerInput>();
 
         GameObject currPlayer = gm.GetPlayers()[pi.playerIndex];
@@ -40,5 +38,12 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (pc)
             pc.SetDashPressed(context.ReadValue<float>());
+    }
+
+    public void OnDeviceDisconnect()
+    {
+        UIManager.DisablePlayer(pi.playerIndex);
+        pc.gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }
