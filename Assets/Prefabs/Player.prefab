@@ -212,6 +212,7 @@ MonoBehaviour:
   scoreZone: {fileID: 0}
   ballPrefab: {fileID: 4128837787339499364, guid: 4ba018f65e687ad449e90c1e2af63d1d,
     type: 3}
+  anim: {fileID: 5553761974509258068}
 --- !u!114 &2976119033713565404
 MonoBehaviour:
   m_ObjectHideFlags: 0

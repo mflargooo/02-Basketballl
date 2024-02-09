@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,14 +23,13 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
         StartCoroutine(ResetPlayerInputs());
 
         gameTime += .9999f;
         mcEggs = maxCarryEggs;
         ps = playerStats;
         pc = playerColors;
-        NewGame(GameInfo.playerIndices.Count);
+        NewGame(GameInfo.playerIndices);
     }
 
     private void Update()
@@ -50,13 +50,13 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void NewGame(int playerCount)
+    public void NewGame(List<int> indices)
     {
         endGame = false;
         gameTimer = gameTime;
-        numPlayers = playerCount;
+        numPlayers = indices.Count;
         ResetPlayers();
-        UIManager.SetupUI();
+        UIManager.SetupUI(indices);
     }
     private static void ResetPlayers()
     {
@@ -87,21 +87,21 @@ public class GameManager : MonoBehaviour
     IEnumerator EndGame()
     {
         yield return new WaitForSeconds(4f);
-        NewGame(numPlayers);
+        NewGame(GameInfo.playerIndices);
     }
 
     IEnumerator ResetPlayerInputs()
     {
         PlayerInputHandler[] pihs = FindObjectsOfType<PlayerInputHandler>();
-        foreach (PlayerInputHandler pih in pihs)
+        for (int i = pihs.Length - 1; i >= 0; i--)
         {
-            pih.Setup(this);
-            pih.gameObject.SetActive(false);
+            pihs[i].Setup(this);
+            pihs[i].gameObject.SetActive(false);
         }
         yield return null;
-        foreach (PlayerInputHandler pih in pihs)
+        for (int i = pihs.Length - 1; i >= 0; i--)
         {
-            pih.gameObject.SetActive(true);
+            pihs[i].gameObject.SetActive(true);
         }
     }
 }

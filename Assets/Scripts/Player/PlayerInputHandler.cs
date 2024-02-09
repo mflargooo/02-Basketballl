@@ -46,14 +46,20 @@ public class PlayerInputHandler : MonoBehaviour
         if (SceneManager.GetActiveScene().buildIndex != 2) return;
 
         UIManager.DisablePlayer(pi.playerIndex);
+        if (GameInfo.playerIndices.Remove(pi.playerIndex))
+        print("Removed " + pi.playerIndex.ToString());
+        print(pc.GetPlayerID());
         pc.gameObject.SetActive(false);
+        UIManager.UpdatePlacements();
     }
 
     public void OnDeviceRegain()
     {
         if (SceneManager.GetActiveScene().buildIndex != 2) return;
 
+        if (!GameInfo.playerIndices.Contains(pi.playerIndex)) GameInfo.playerIndices.Add(pi.playerIndex);
         UIManager.EnablePlayer(pi.playerIndex);
         pc.gameObject.SetActive(true);
+        UIManager.UpdatePlacements();
     }
 }

@@ -24,6 +24,8 @@ public class Shooting : MonoBehaviour
     [SerializeField] private Transform scoreZone;
     [SerializeField] private GameObject ballPrefab;
 
+    [SerializeField] private Animator anim;
+
     private float[] shootRanges;
     bool attemptingShot;
 
@@ -55,6 +57,8 @@ public class Shooting : MonoBehaviour
         float multiplier = 1;
         if (horzDisp.magnitude <= shootRanges[2] && attemptingShot && GameManager.ps[playerID].eggCt > 0 && !hasPlayed && !pc.IsDashing() && pc.GetCanMove())
         {
+            rb.velocity = Vector3.zero;
+            anim.SetFloat("Velocity", 0);
             pc.DisableMovement();
 
             if (horzDisp.magnitude < shootRanges[0]) multiplier = 3;

@@ -24,7 +24,7 @@ public class UIManager : MonoBehaviour
         foreach (GameObject p in pi) p.SetActive(false);
     }
 
-    public static void SetupUI()
+    public static void SetupUI(List<int> indices)
     {
         /*int width = Screen.width;
         int deltaW = width / (numPlayers + 1);
@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
             icon.gameObject.SetActive(true);
         }*/
 
-        for (int i = 0; i < 4; i++)
+        foreach (int i in indices)
         {
             /*reset egg icons*/
             UpdateEggs(i, 0);
@@ -62,15 +62,15 @@ public class UIManager : MonoBehaviour
 
     public static void UpdateScore(int pid, int score)
     {
-        pi[pid].transform.GetChild(4).GetComponent<TMP_Text>().text = "Score: " + score.ToString();
+        pi[pid].transform.GetChild(3).GetComponent<TMP_Text>().text = "Score: " + score.ToString();
         UpdatePlacements();
     }
 
-    private static void UpdatePlacements()
+    public static void UpdatePlacements()
     {
         SortedList<int, List<int>> scoreID = new SortedList<int, List<int>>();
 
-        for (int i = 0; i < GameManager.GetNumPlayers(); i++)
+        foreach (int i in GameInfo.playerIndices)
         {
             int score = GameManager.ps[i].score;
             if (!scoreID.ContainsKey(score))
