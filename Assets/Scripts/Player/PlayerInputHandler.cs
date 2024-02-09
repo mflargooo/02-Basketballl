@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.InputSystem.InputAction;
+using UnityEngine.SceneManagement;
 
 public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerInput pi;
-    private PlayerController pc;
-    private Shooting sh;
+    [SerializeField] private PlayerController pc;
+    [SerializeField] private Shooting sh;
 
     public void Setup(GameManager gm)
     {
         pi = GetComponent<PlayerInput>();
-
+        pi.defaultActionMap = "Player";
         GameObject currPlayer = gm.GetPlayers()[pi.playerIndex];
         currPlayer.SetActive(true);
         pc = currPlayer.GetComponent<PlayerController>();
@@ -42,8 +43,17 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnDeviceDisconnect()
     {
+        if (SceneManager.GetActiveScene().buildIndex != 2) return;
+
         UIManager.DisablePlayer(pi.playerIndex);
         pc.gameObject.SetActive(false);
-        Destroy(gameObject);
+    }
+
+    public void OnDeviceRegain()
+    {
+        if (SceneManager.GetActiveScene().buildIndex != 2) return;
+
+        UIManager.EnablePlayer(pi.playerIndex);
+        pc.gameObject.SetActive(true);
     }
 }

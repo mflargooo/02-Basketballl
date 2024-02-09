@@ -215,8 +215,90 @@
         {
             "name": "UI",
             "id": "1ad3c320-2541-453e-9467-1337fd6f6d51",
-            "actions": [],
-            "bindings": []
+            "actions": [
+                {
+                    "name": "DecrementCharIndex",
+                    "type": "Button",
+                    "id": "4ae15eae-91d2-49c4-8cd0-222b733e9a90",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "IncrementCharIndex",
+                    "type": "Button",
+                    "id": "a727db5a-9001-416f-bfb2-2fbf55cd4cf0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Ready",
+                    "type": "Button",
+                    "id": "023780f3-7081-45fa-9ebb-eb7f7c95867e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Unready",
+                    "type": "Button",
+                    "id": "ad52fe17-48cc-4b33-a08b-2f4b8ddb69c0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "43544f23-fddd-4ceb-aabb-c28c5da6737d",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "DecrementCharIndex",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9b0cd99-00b3-46d3-983a-840f1278657d",
+                    "path": "<Gamepad>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "IncrementCharIndex",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e53d83c8-f24c-4c67-adc3-9694b618a961",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Ready",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d7eebd98-3996-431e-af38-13db3f974287",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Unready",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

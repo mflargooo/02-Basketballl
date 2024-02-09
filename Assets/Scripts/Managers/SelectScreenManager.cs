@@ -106,8 +106,8 @@ public class SelectScreenManager : MonoBehaviour
 
         GameInfo.characterSelectIndexes = characterSelectIndexes;
         GameInfo.playerIndices = playerIndices;
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-        GameInfo.SetUpPlayers();
     }
     public void StopCountdown()
     {

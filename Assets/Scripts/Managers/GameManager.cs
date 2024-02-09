@@ -22,11 +22,8 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PlayerInputHandler[] pihs = FindObjectsOfType<PlayerInputHandler>();
-        foreach(PlayerInputHandler pih in pihs)
-        {
-            pih.Setup(this);
-        }
+
+        StartCoroutine(ResetPlayerInputs());
 
         gameTime += .9999f;
         mcEggs = maxCarryEggs;
@@ -91,5 +88,20 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(4f);
         NewGame(numPlayers);
+    }
+
+    IEnumerator ResetPlayerInputs()
+    {
+        PlayerInputHandler[] pihs = FindObjectsOfType<PlayerInputHandler>();
+        foreach (PlayerInputHandler pih in pihs)
+        {
+            pih.Setup(this);
+            pih.gameObject.SetActive(false);
+        }
+        yield return null;
+        foreach (PlayerInputHandler pih in pihs)
+        {
+            pih.gameObject.SetActive(true);
+        }
     }
 }

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1737045313166089158}
   - component: {fileID: 4911826019569355442}
   - component: {fileID: 7486425995067546710}
+  - component: {fileID: 7302995270268414114}
   m_Layer: 0
   m_Name: InputHandler
   m_TagString: Untagged
@@ -45,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 2da347a4f99bef0469b0be7d3b448d18,
+  m_Actions: {fileID: -944628639613478452, guid: 2a42976949c270c409d8e9d23283187e,
     type: 3}
   m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
@@ -64,13 +65,97 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 7302995270268414114}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnDeviceDisconnect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_DeviceRegainedEvent:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 7486425995067546710}
+        m_TargetAssemblyTypeName: CharacterSelectInputHandler, Assembly-CSharp
+        m_MethodName: OnDeviceRegain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 7302995270268414114}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnDeviceRegain
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
   m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7302995270268414114}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a82029c9-7669-45dd-b6ab-edee03942ef1
+    m_ActionName: Player/Move
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7302995270268414114}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnShoot
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: f24b7710-06d6-444b-87b2-2744b9727d63
+    m_ActionName: Player/Shoot
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7302995270268414114}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnDash
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: aef15639-471b-49cb-958e-bc098f87a516
+    m_ActionName: Player/Dash
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7486425995067546710}
@@ -85,8 +170,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 5af4b38b-2b11-4110-b291-48bcfbe96f39
-    m_ActionName: UI/DecrementCharIndex[/XInputControllerWindows/leftStick/left,/XInputControllerWindows1/leftStick/left]
+    m_ActionId: 4ae15eae-91d2-49c4-8cd0-222b733e9a90
+    m_ActionName: UI/DecrementCharIndex
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7486425995067546710}
@@ -101,8 +186,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 5d8fcd80-de89-4498-90b2-c6e5d2e6974e
-    m_ActionName: UI/IncrementCharIndex[/XInputControllerWindows/leftStick/right,/XInputControllerWindows1/leftStick/right]
+    m_ActionId: a727db5a-9001-416f-bfb2-2fbf55cd4cf0
+    m_ActionName: UI/IncrementCharIndex
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7486425995067546710}
@@ -117,8 +202,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: bbae9201-3871-4229-9348-a27fa20a4f4e
-    m_ActionName: UI/Ready[/XInputControllerWindows/buttonSouth,/XInputControllerWindows1/buttonSouth]
+    m_ActionId: 023780f3-7081-45fa-9ebb-eb7f7c95867e
+    m_ActionName: UI/Ready
   - m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7486425995067546710}
@@ -133,8 +218,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-    m_ActionId: 693e06ff-9005-4ae6-8013-665a4302a7d5
-    m_ActionName: UI/Unready[/XInputControllerWindows/buttonEast,/XInputControllerWindows1/buttonEast]
+    m_ActionId: ad52fe17-48cc-4b33-a08b-2f4b8ddb69c0
+    m_ActionName: UI/Unready
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: Gamepad
   m_DefaultActionMap: UI
@@ -150,5 +235,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad2953c1612608c48937952ab914bf09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7302995270268414114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757597991812875948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 235e9b5d68724274d9b88897daaaa474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
