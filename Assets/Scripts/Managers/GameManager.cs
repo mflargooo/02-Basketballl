@@ -29,6 +29,14 @@ public class GameManager : MonoBehaviour
         mcEggs = maxCarryEggs;
         ps = playerStats;
         pc = playerColors;
+
+        foreach(int i in GameInfo.playerIndices)
+        {
+            GameObject model = players[i].transform.GetChild(1).GetChild(GameInfo.characterSelectIndexes[i]).gameObject;
+            model.SetActive(true);
+            players[i].GetComponent<PlayerController>().SetAnimator(model.GetComponent<Animator>());
+        }
+
         NewGame(GameInfo.playerIndices);
     }
 

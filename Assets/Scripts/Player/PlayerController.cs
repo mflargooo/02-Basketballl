@@ -100,5 +100,10 @@ public class PlayerController : MonoBehaviour
     {
         return canMove;
     }
+
+    public void SetAnimator(Animator anim)
+    {
+        this.anim = anim;
+    }
 }
 
