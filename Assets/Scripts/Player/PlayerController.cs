@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float dashScale = 2f;
     [SerializeField] private float dashTime;
     [SerializeField] private float dashCooldownTime;
+
     private bool isDashing;
 
     private float baseMS, dct;

@@ -387,7 +387,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 143020311}
-  offset: {x: -30, y: 0, z: 0}
+  offset: {x: -45, y: 0, z: 0}
 --- !u!1 &77605272
 GameObject:
   m_ObjectHideFlags: 0
@@ -2078,7 +2078,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 733143592}
-  offset: {x: -30, y: 0, z: 0}
+  offset: {x: -45, y: 0, z: 0}
 --- !u!1 &410052988
 GameObject:
   m_ObjectHideFlags: 0
@@ -2939,7 +2939,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 486442006}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 871464680}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4292,7 +4292,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 143020311}
-  offset: {x: 30, y: 0, z: 0}
+  offset: {x: 45, y: 0, z: 0}
 --- !u!1 &798718070
 GameObject:
   m_ObjectHideFlags: 0
@@ -4705,7 +4705,10 @@ Transform:
   m_LocalPosition: {x: -19.925936, y: -9.763384, z: 2.9077878}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 968784334}
+  - {fileID: 534404261}
+  - {fileID: 1266118808}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &908305447
@@ -4760,7 +4763,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 302521794}
-  offset: {x: -30, y: 0, z: 0}
+  offset: {x: -45, y: 0, z: 0}
 --- !u!1 &915137527
 GameObject:
   m_ObjectHideFlags: 0
@@ -5174,7 +5177,7 @@ RectTransform:
   - {fileID: 110783246}
   - {fileID: 1183067944}
   - {fileID: 988279059}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 871464680}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -5456,7 +5459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 733143592}
-  offset: {x: 30, y: 0, z: 0}
+  offset: {x: 45, y: 0, z: 0}
 --- !u!1 &985002281
 GameObject:
   m_ObjectHideFlags: 0
@@ -6005,7 +6008,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1699773815}
-  offset: {x: 30, y: 0, z: 0}
+  offset: {x: 45, y: 0, z: 0}
 --- !u!1 &1111938573
 GameObject:
   m_ObjectHideFlags: 0
@@ -6832,7 +6835,7 @@ RectTransform:
   - {fileID: 1528374583}
   - {fileID: 982318886}
   - {fileID: 782135561}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 871464680}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7264,7 +7267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1699773815}
-  offset: {x: -30, y: 0, z: 0}
+  offset: {x: -45, y: 0, z: 0}
 --- !u!1 &1473825948
 GameObject:
   m_ObjectHideFlags: 0
@@ -7661,7 +7664,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 302521794}
-  offset: {x: 30, y: 0, z: 0}
+  offset: {x: 45, y: 0, z: 0}
 --- !u!1 &1576300362
 GameObject:
   m_ObjectHideFlags: 0
@@ -9030,6 +9033,3 @@ SceneRoots:
   - {fileID: 733143585}
   - {fileID: 143020304}
   - {fileID: 871464680}
-  - {fileID: 968784334}
-  - {fileID: 534404261}
-  - {fileID: 1266118808}

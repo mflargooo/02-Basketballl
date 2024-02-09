@@ -14,7 +14,7 @@ public class Collect : MonoBehaviour
         if (other.gameObject.tag == "Egg" && GameManager.ps[playerID].GetComponent<PlayerStats>().eggCt < GameManager.GetMaxEggCount())
         {
             Destroy(other.gameObject);
-            GameManager.ps[playerID].eggCt++;
+            GameManager.ps[playerID].eggCt++; 
             UIManager.UpdateEggs(playerID, GameManager.ps[playerID].eggCt);
             /* collect egg sound */
         }
