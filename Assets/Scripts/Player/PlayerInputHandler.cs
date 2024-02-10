@@ -8,8 +8,8 @@ using UnityEngine.SceneManagement;
 public class PlayerInputHandler : MonoBehaviour
 {
     private PlayerInput pi;
-    [SerializeField] private PlayerController pc;
-    [SerializeField] private Shooting sh;
+    private PlayerController pc;
+    private Shooting sh;
 
     public void Setup(GameManager gm)
     {
@@ -45,12 +45,10 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().buildIndex != 2) return;
 
+        GameInfo.playerIndices.Remove(pi.playerIndex);
         UIManager.DisablePlayer(pi.playerIndex);
-        if (GameInfo.playerIndices.Remove(pi.playerIndex))
-        print("Removed " + pi.playerIndex.ToString());
-        print(pc.GetPlayerID());
-        pc.gameObject.SetActive(false);
         UIManager.UpdatePlacements();
+        pc.gameObject.SetActive(false);
     }
 
     public void OnDeviceRegain()
@@ -59,7 +57,7 @@ public class PlayerInputHandler : MonoBehaviour
 
         if (!GameInfo.playerIndices.Contains(pi.playerIndex)) GameInfo.playerIndices.Add(pi.playerIndex);
         UIManager.EnablePlayer(pi.playerIndex);
-        pc.gameObject.SetActive(true);
         UIManager.UpdatePlacements();
+        pc.gameObject.SetActive(true);
     }
 }

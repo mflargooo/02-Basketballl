@@ -53,8 +53,8 @@ MonoBehaviour:
   m_DeviceLostEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7486425995067546710}
-        m_TargetAssemblyTypeName: CharacterSelectInputHandler, Assembly-CSharp
+      - m_Target: {fileID: 7302995270268414114}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: OnDeviceDisconnect
         m_Mode: 1
         m_Arguments:
@@ -65,8 +65,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7302995270268414114}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+      - m_Target: {fileID: 7486425995067546710}
+        m_TargetAssemblyTypeName: CharacterSelectInputHandler, Assembly-CSharp
         m_MethodName: OnDeviceDisconnect
         m_Mode: 1
         m_Arguments:
@@ -80,8 +80,8 @@ MonoBehaviour:
   m_DeviceRegainedEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 7486425995067546710}
-        m_TargetAssemblyTypeName: CharacterSelectInputHandler, Assembly-CSharp
+      - m_Target: {fileID: 7302995270268414114}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
         m_MethodName: OnDeviceRegain
         m_Mode: 1
         m_Arguments:
@@ -92,8 +92,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 7302995270268414114}
-        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+      - m_Target: {fileID: 7486425995067546710}
+        m_TargetAssemblyTypeName: CharacterSelectInputHandler, Assembly-CSharp
         m_MethodName: OnDeviceRegain
         m_Mode: 1
         m_Arguments:

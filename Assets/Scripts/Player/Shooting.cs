@@ -31,6 +31,8 @@ public class Shooting : MonoBehaviour
 
     bool skipThisGame;
     bool insideSmall = false;
+    float accelGR;
+    float multiplier;
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +42,7 @@ public class Shooting : MonoBehaviour
         shootRanges = sm.GetShootRanges();
         shotText.gameObject.SetActive(false);
         ResetGame();
+        accelGR = accelGrowRate;
     }
 
     // Update is called once per frame
@@ -54,21 +57,22 @@ public class Shooting : MonoBehaviour
         }
         else if (insideSmall) GetComponent<PlayerEffects>().SetInvuln(false);
 
-        float multiplier = 1;
         if (horzDisp.magnitude <= shootRanges[2] && attemptingShot && GameManager.ps[playerID].eggCt > 0 && !hasPlayed && !pc.IsDashing() && pc.GetCanMove())
         {
+            multiplier = 1f;
             rb.velocity = Vector3.zero;
             anim.SetFloat("Velocity", 0);
             pc.DisableMovement();
 
-            if (horzDisp.magnitude < shootRanges[0]) multiplier = 3;
-            else if (horzDisp.magnitude < shootRanges[1]) multiplier = 2;
+            if (horzDisp.magnitude < shootRanges[0]) multiplier = 3f;
+            else if (horzDisp.magnitude < shootRanges[1]) multiplier = 2f;
 
             hasPlayed = true;
             isPressing = true;
             acceleration = 0f; // reset acc
             SetTargetValue(multiplier);
             bar.gameObject.SetActive(true);
+            accelGR = accelGrowRate + (4 - multiplier) * .5f;
         }
 
         if (isPressing && attemptingShot)
@@ -78,9 +82,9 @@ public class Shooting : MonoBehaviour
             if (bar.value >= 1f && acceleration > 0 || bar.value <= 0f && acceleration < 0f)
             {
                 acceleration = -acceleration;
-                accelGrowRate = -accelGrowRate;
+                accelGR = -accelGR;
             }
-            acceleration = Mathf.Clamp(acceleration + Time.deltaTime * accelGrowRate, -maxAcceleration, maxAcceleration); 
+            acceleration = Mathf.Clamp(acceleration + Time.deltaTime * accelGR, -maxAcceleration - (3 + multiplier) * .5f, maxAcceleration + (3 - multiplier) * .5f); 
             bar.value += acceleration * Time.deltaTime; 
         }
         else if (Mathf.Abs(acceleration) > 0)
@@ -182,6 +186,10 @@ public class Shooting : MonoBehaviour
         isPressing = false;
         acceleration = 0f;
         ResetGame();
+    }
+    public void SetAnimator(Animator anim)
+    {
+        this.anim = anim;
     }
 }
 

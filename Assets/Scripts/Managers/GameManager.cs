@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
             GameObject model = players[i].transform.GetChild(1).GetChild(GameInfo.characterSelectIndexes[i]).gameObject;
             model.SetActive(true);
             players[i].GetComponent<PlayerController>().SetAnimator(model.GetComponent<Animator>());
+            players[i].GetComponent<Shooting>().SetAnimator(model.GetComponent<Animator>());
+            players[i].GetComponent<PlayerEffects>().SetAnimator(model.GetComponent<Animator>());
         }
 
         NewGame(GameInfo.playerIndices);

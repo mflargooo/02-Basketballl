@@ -85,4 +85,8 @@ public class PlayerEffects : MonoBehaviour
     {
         invuln = b;
     }
+    public void SetAnimator(Animator anim)
+    {
+        this.anim = anim;
+    }
 }

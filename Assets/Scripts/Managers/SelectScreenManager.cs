@@ -12,6 +12,7 @@ public class SelectScreenManager : MonoBehaviour
     [SerializeField] private float countdownTimer;
     [SerializeField] private TMP_Text centerText;
     [SerializeField] private GameObject[] playerUI;
+    [SerializeField] private GameObject[] models;
 
     private List<int> playerIndices = new List<int>();
     private int[] characterSelectIndexes;
@@ -19,6 +20,7 @@ public class SelectScreenManager : MonoBehaviour
     private Color[] uiColors;
 
     private PlayerInput[] pis;
+    private bool lockState;
 
     private void Start()
     {
@@ -37,21 +39,26 @@ public class SelectScreenManager : MonoBehaviour
         }
     }
 
-    public void AddPlayer(int i)
+    public void AddPlayer(int pid)
     {
-        if (!playerIndices.Contains(i))
+        if (!playerIndices.Contains(pid))
         {
-            playerIndices.Add(i);
+            playerIndices.Add(pid);
         }
-        playerUI[i].SetActive(true);
-        Unready(i);
+        playerUI[pid].SetActive(true);
+        models[pid].transform.GetChild(characterSelectIndexes[pid]).gameObject.SetActive(true);
+        Unready(pid);
         StopCountdown();
     }
 
-    public void RemovePlayer(int i)
+    public void RemovePlayer(int pid)
     {
-        playerIndices.Remove(i);
-        playerUI[i].SetActive(false);
+        playerIndices.Remove(pid);
+        playerUI[pid].SetActive(false);
+        for(int i= 0; i < 4; i++)
+        {
+            models[pid].transform.GetChild(characterSelectIndexes[i]).gameObject.SetActive(false);
+        }
         StopCountdown();
     }
 
@@ -74,26 +81,32 @@ public class SelectScreenManager : MonoBehaviour
         StartCoroutine(StartGame());
     }
 
-    public void Unready(int i)
+    public void Unready(int pid)
     {
-        playersReady[i] = false;
-        playerUI[i].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Ready?";
-        playerUI[i].transform.GetChild(0).GetComponent<Image>().color = uiColors[i] * .75f;
+        playersReady[pid] = false;
+        playerUI[pid].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Ready?";
+        playerUI[pid].transform.GetChild(0).GetComponent<Image>().color = uiColors[pid] * .75f;
 
         StopCountdown();
     }
 
     public void SetCharacterIndex(int pid, int v)
     {
-        int newVal = characterSelectIndexes[pid] + v;
+        if (lockState || v == 0) return;
 
+        models[pid].transform.GetChild(characterSelectIndexes[pid]).gameObject.SetActive(false);
+        
+        int newVal = characterSelectIndexes[pid] + v;
         if (newVal > 3) characterSelectIndexes[pid] = 0;
         else if (newVal < 0) characterSelectIndexes[pid] = 3;
         else characterSelectIndexes[pid] = newVal;
+
+        models[pid].transform.GetChild(characterSelectIndexes[pid]).gameObject.SetActive(true);
     }
 
     private IEnumerator StartGame()
     {
+        lockState = true;
         GameInfo.playerIndices = playerIndices;
         GameInfo.characterSelectIndexes = characterSelectIndexes;
         float timer = countdownTimer;
@@ -111,6 +124,7 @@ public class SelectScreenManager : MonoBehaviour
     }
     public void StopCountdown()
     {
+        lockState = false;
         StopAllCoroutines();
         centerText.text = "Select Your Character";
     }
