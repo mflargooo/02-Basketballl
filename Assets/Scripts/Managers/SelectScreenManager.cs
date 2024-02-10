@@ -101,7 +101,7 @@ public class SelectScreenManager : MonoBehaviour
 
     public void SetCharacterIndex(int pid, int v)
     {
-        if (lockState || v == 0) return;
+        if (lockState || v == 0 || playersReady[pid]) return;
 
         Camera.main.GetComponent<AudioSource>().PlayOneShot(menuArrows);
         models[pid].transform.GetChild(characterSelectIndexes[pid]).gameObject.SetActive(false);
