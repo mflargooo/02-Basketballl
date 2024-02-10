@@ -6228,6 +6228,10 @@ MonoBehaviour:
   - {r: 1, g: 0, b: 0, a: 0}
   - {r: 1, g: 1, b: 0, a: 0}
   - {r: 0, g: 1, b: 0, a: 0}
+  announcerStartSounds:
+  - {fileID: 8300000, guid: 43e2e1f27af187945b35c5aba7dc26da, type: 3}
+  - {fileID: 8300000, guid: 9ca003c065447ef43b1640759de17d6c, type: 3}
+  tenSecsLeft: {fileID: 8300000, guid: 314eb56777c2218449a70d42145a183f, type: 3}
 --- !u!4 &955915078
 Transform:
   m_ObjectHideFlags: 0

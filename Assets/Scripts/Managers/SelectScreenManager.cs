@@ -26,7 +26,6 @@ public class SelectScreenManager : MonoBehaviour
     [SerializeField] private AudioClip menuArrows;
     [SerializeField] private AudioClip readyClip;
     [SerializeField] private AudioClip joinClip;
-    [SerializeField] private AudioClip[] announcerStartSounds;
     [SerializeField] private AudioSource quieterAudio;
 
     private void Start()
@@ -118,7 +117,6 @@ public class SelectScreenManager : MonoBehaviour
     private IEnumerator StartGame()
     {
         lockState = true;
-        bool playedAudio = false;
         GameInfo.playerIndices = playerIndices;
         GameInfo.characterSelectIndexes = characterSelectIndexes;
         float timer = countdownTimer;
@@ -126,16 +124,17 @@ public class SelectScreenManager : MonoBehaviour
         {
             timer -= Time.deltaTime;
             centerText.text = ((int)Mathf.Ceil(timer)).ToString();
-            if(timer < 1f && !playedAudio)
-            {
-                playedAudio = true;
-                Camera.main.GetComponent<AudioSource>().PlayOneShot(announcerStartSounds[Random.Range(0, announcerStartSounds.Length)]);
-            }
             yield return null;
         }
 
         GameInfo.characterSelectIndexes = characterSelectIndexes;
         GameInfo.playerIndices = playerIndices;
+
+        PlayerInputHandler[] pihs = FindObjectsOfType<PlayerInputHandler>();
+        for (int i = pihs.Length - 1; i >= 0; i--)
+        {
+            pihs[i].gameObject.SetActive(false);
+        }
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
