@@ -3670,7 +3670,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &534404258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6232,6 +6232,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 43e2e1f27af187945b35c5aba7dc26da, type: 3}
   - {fileID: 8300000, guid: 9ca003c065447ef43b1640759de17d6c, type: 3}
   tenSecsLeft: {fileID: 8300000, guid: 314eb56777c2218449a70d42145a183f, type: 3}
+  clock: {fileID: 534404257}
 --- !u!4 &955915078
 Transform:
   m_ObjectHideFlags: 0

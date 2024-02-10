@@ -44,6 +44,7 @@ public class UIManager : MonoBehaviour
 
             /* reset score */
             UpdateScore(i, 0);
+            pi[i].SetActive(true);
         }
     }
 

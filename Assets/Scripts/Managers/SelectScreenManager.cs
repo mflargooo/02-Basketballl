@@ -130,12 +130,6 @@ public class SelectScreenManager : MonoBehaviour
         GameInfo.characterSelectIndexes = characterSelectIndexes;
         GameInfo.playerIndices = playerIndices;
 
-        PlayerInputHandler[] pihs = FindObjectsOfType<PlayerInputHandler>();
-        for (int i = pihs.Length - 1; i >= 0; i--)
-        {
-            pihs[i].gameObject.SetActive(false);
-        }
-
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void StopCountdown()

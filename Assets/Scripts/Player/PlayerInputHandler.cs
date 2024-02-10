@@ -20,6 +20,8 @@ public class PlayerInputHandler : MonoBehaviour
         pc = currPlayer.GetComponent<PlayerController>();
         sh = currPlayer.GetComponent<Shooting>();
 
+        pi.ActivateInput();
+
         UIManager.EnablePlayer(pi.playerIndex);
     }
     public void OnMove(CallbackContext context)

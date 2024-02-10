@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     public static CharacterSoundEffects[] charSFX;
     [SerializeField] private AudioClip[] announcerStartSounds;
     [SerializeField] private AudioClip tenSecsLeft;
+    [SerializeField] private GameObject clock;
     bool playTenSecsLeft;
 
     bool started;
@@ -31,12 +32,13 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         started = false;
-        StartCoroutine(BeginGame());
         charSFX = new CharacterSoundEffects[4];
         gameTime += .9999f;
         mcEggs = maxCarryEggs;
         ps = playerStats;
         pc = playerColors;
+
+        StartCoroutine(BeginGame());
     }
 
     private void Update()
@@ -69,6 +71,7 @@ public class GameManager : MonoBehaviour
         playTenSecsLeft = false;
         endGame = false;
         gameTimer = gameTime;
+        numPlayers = indices.Count;
         ResetPlayers();
         UIManager.SetupUI(indices);
     }
@@ -105,20 +108,14 @@ public class GameManager : MonoBehaviour
         NewGame(GameInfo.playerIndices);
     }
 
-    IEnumerator ResetPlayerInputs()
-    {
-        PlayerInputHandler[] pihs = FindObjectsOfType<PlayerInputHandler>();
-        
-        for (int i = pihs.Length - 1; i >= 0; i--)
-        {
-            pihs[i].Setup(this);
-            pihs[i].gameObject.SetActive(true);
-            yield return null;
-        }
-    }
-
     IEnumerator BeginGame()
     {
+        PlayerInputHandler[] pihs = FindObjectsOfType<PlayerInputHandler>();
+        for (int i = pihs.Length - 1; i >= 0; i--)
+        {
+            pihs[i].gameObject.SetActive(false);
+        }
+
         AudioClip selected = null;
         if (Random.Range(0f, 1f) < .2)
             selected = announcerStartSounds[0];
@@ -126,8 +123,9 @@ public class GameManager : MonoBehaviour
 
         Camera.main.GetComponent<AudioSource>().PlayOneShot(selected);
 
-        yield return new WaitForSeconds(selected.length + .5f);
+        yield return new WaitForSeconds(selected.length - .5f);
 
+        clock.SetActive(true);
         foreach (int i in GameInfo.playerIndices)
         {
             GameObject model = players[i].transform.GetChild(1).GetChild(GameInfo.characterSelectIndexes[i]).gameObject;
@@ -140,7 +138,26 @@ public class GameManager : MonoBehaviour
 
         started = true;
         NewGame(GameInfo.playerIndices);
-        StartCoroutine(ResetPlayerInputs());
+        
+        yield return null;
+        for (int i = pihs.Length - 1; i >= 0; i--)
+        {
+            pihs[i].gameObject.SetActive(true);
+            yield return null;
+            pihs[i].Setup(this);
+        }
+
+        for (int i = pihs.Length - 1; i >= 0; i--)
+        {
+            pihs[i].gameObject.SetActive(false);
+            yield return null;
+        }
+        yield return null;
+        for (int i = pihs.Length - 1; i >= 0; i--)
+        {
+            pihs[i].gameObject.SetActive(true);
+            yield return null;
+        }
     }
 }
 
