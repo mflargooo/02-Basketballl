@@ -33,6 +33,7 @@ public class PlayerEffects : MonoBehaviour
         if (invuln) yield return null;
         else 
         {
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(GameManager.charSFX[pc.GetPlayerID()].hit);
             anim.Play(stun.name);
             Vector3 dir = hitBy.forward;
             transform.rotation = Quaternion.LookRotation((hitBy.position - transform.position).normalized, transform.up);

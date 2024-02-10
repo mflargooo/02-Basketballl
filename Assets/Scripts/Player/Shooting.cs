@@ -149,6 +149,7 @@ public class Shooting : MonoBehaviour
 
         if (!skipThisGame)
         {
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(GameManager.charSFX[playerID].hup);
             if (bar.value >= successRangeStart && bar.value <= successRangeEnd)
             {
                 ShootAt();

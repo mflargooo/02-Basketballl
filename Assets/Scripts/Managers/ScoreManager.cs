@@ -10,6 +10,9 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private GameObject[] rings;
 
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip swooshClip;
+
     private float[] shootingRanges;
     private void Awake()
     {
@@ -38,6 +41,7 @@ public class ScoreManager : MonoBehaviour
             GameManager.ps[pid].score += pts;
             UIManager.UpdateScore(pid, GameManager.ps[pid].score);
             Destroy(ball.gameObject, .1f);
+            audioSource.PlayOneShot(swooshClip);
         }
     }
 

@@ -20,9 +20,12 @@ public class GameManager : MonoBehaviour
     private float gameTimer;
     bool endGame;
 
+    public static CharacterSoundEffects[] charSFX;
+
     // Start is called before the first frame update
     void Start()
     {
+        charSFX = new CharacterSoundEffects[4];
         StartCoroutine(ResetPlayerInputs());
 
         gameTime += .9999f;
@@ -37,6 +40,7 @@ public class GameManager : MonoBehaviour
             players[i].GetComponent<PlayerController>().SetAnimator(model.GetComponent<Animator>());
             players[i].GetComponent<Shooting>().SetAnimator(model.GetComponent<Animator>());
             players[i].GetComponent<PlayerEffects>().SetAnimator(model.GetComponent<Animator>());
+            charSFX[i] = model.GetComponent<CharacterSoundEffects>();
         }
 
         NewGame(GameInfo.playerIndices);

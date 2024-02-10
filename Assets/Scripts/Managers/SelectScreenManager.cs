@@ -22,6 +22,13 @@ public class SelectScreenManager : MonoBehaviour
     private PlayerInput[] pis;
     private bool lockState;
 
+    [SerializeField] private AudioClip[] charSelectSFX;
+    [SerializeField] private AudioClip menuArrows;
+    [SerializeField] private AudioClip readyClip;
+    [SerializeField] private AudioClip joinClip;
+    [SerializeField] private AudioClip[] announcerStartSounds;
+    [SerializeField] private AudioSource quieterAudio;
+
     private void Start()
     {
         pis = new PlayerInput[4];
@@ -47,6 +54,7 @@ public class SelectScreenManager : MonoBehaviour
         }
         playerUI[pid].SetActive(true);
         models[pid].transform.GetChild(characterSelectIndexes[pid]).gameObject.SetActive(true);
+        quieterAudio.GetComponent<AudioSource>().PlayOneShot(joinClip);
         Unready(pid);
         StopCountdown();
     }
@@ -68,6 +76,8 @@ public class SelectScreenManager : MonoBehaviour
         playerUI[i].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Ready!";
         playerUI[i].transform.GetChild(0).GetComponent<Image>().color = uiColors[i];
 
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip);
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(charSelectSFX[characterSelectIndexes[i]]);
         CheckAllReady();
     }
 
@@ -94,6 +104,7 @@ public class SelectScreenManager : MonoBehaviour
     {
         if (lockState || v == 0) return;
 
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(menuArrows);
         models[pid].transform.GetChild(characterSelectIndexes[pid]).gameObject.SetActive(false);
         
         int newVal = characterSelectIndexes[pid] + v;
@@ -107,6 +118,7 @@ public class SelectScreenManager : MonoBehaviour
     private IEnumerator StartGame()
     {
         lockState = true;
+        bool playedAudio = false;
         GameInfo.playerIndices = playerIndices;
         GameInfo.characterSelectIndexes = characterSelectIndexes;
         float timer = countdownTimer;
@@ -114,6 +126,11 @@ public class SelectScreenManager : MonoBehaviour
         {
             timer -= Time.deltaTime;
             centerText.text = ((int)Mathf.Ceil(timer)).ToString();
+            if(timer < 1f && !playedAudio)
+            {
+                playedAudio = true;
+                Camera.main.GetComponent<AudioSource>().PlayOneShot(announcerStartSounds[Random.Range(0, announcerStartSounds.Length)]);
+            }
             yield return null;
         }
 
