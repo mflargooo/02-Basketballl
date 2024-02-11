@@ -66,17 +66,20 @@ public class SelectScreenManager : MonoBehaviour
         {
             models[pid].transform.GetChild(characterSelectIndexes[i]).gameObject.SetActive(false);
         }
+        GameInfo.playerInputObjs[pid] = null;
         StopCountdown();
     }
 
-    public void Ready(int i)
+    public void Ready(int pid)
     {
-        playersReady[i] = true;
-        playerUI[i].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Ready!";
-        playerUI[i].transform.GetChild(0).GetComponent<Image>().color = uiColors[i];
+        if (playersReady[pid]) return;
+
+        playersReady[pid] = true;
+        playerUI[pid].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Ready!";
+        playerUI[pid].transform.GetChild(0).GetComponent<Image>().color = uiColors[pid];
 
         Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip);
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(charSelectSFX[characterSelectIndexes[i]]);
+        Camera.main.GetComponent<AudioSource>().PlayOneShot(charSelectSFX[characterSelectIndexes[pid]]);
         CheckAllReady();
     }
 

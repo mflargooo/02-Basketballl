@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private float gameTime = 60;
     [SerializeField] private int maxCarryEggs;
-    private static int numPlayers = 4;
     private static int mcEggs;
 
     [SerializeField] private GameObject[] players;
@@ -71,7 +70,6 @@ public class GameManager : MonoBehaviour
         playTenSecsLeft = false;
         endGame = false;
         gameTimer = gameTime;
-        numPlayers = indices.Count;
         ResetPlayers();
         UIManager.SetupUI(indices);
     }
@@ -88,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     public static int GetNumPlayers()
     {
-        return numPlayers;
+        return GameInfo.playerIndices.Count;
     }
 
     public static int GetMaxEggCount()
@@ -110,10 +108,10 @@ public class GameManager : MonoBehaviour
 
     IEnumerator BeginGame()
     {
-        PlayerInputHandler[] pihs = FindObjectsOfType<PlayerInputHandler>();
-        for (int i = pihs.Length - 1; i >= 0; i--)
+        for (int i = 0; i < 4; i++)
         {
-            pihs[i].gameObject.SetActive(false);
+            if(GameInfo.playerInputObjs[3 - i])
+                GameInfo.playerInputObjs[3 - i].SetActive(false);
         }
 
         AudioClip selected = null;
@@ -124,7 +122,8 @@ public class GameManager : MonoBehaviour
         Camera.main.GetComponent<AudioSource>().PlayOneShot(selected);
 
         yield return new WaitForSeconds(selected.length - .5f);
-
+        
+        NewGame(GameInfo.playerIndices);
         clock.SetActive(true);
         foreach (int i in GameInfo.playerIndices)
         {
@@ -137,26 +136,33 @@ public class GameManager : MonoBehaviour
         }
 
         started = true;
-        NewGame(GameInfo.playerIndices);
-        
+
         yield return null;
-        for (int i = pihs.Length - 1; i >= 0; i--)
+        for (int i = 0; i < 4; i++)
         {
-            pihs[i].gameObject.SetActive(true);
-            yield return null;
-            pihs[i].Setup(this);
+            if (GameInfo.playerInputObjs[3 - i])
+            {
+                GameInfo.playerInputObjs[3 - i].SetActive(true);
+                GameInfo.playerInputObjs[3 - i].GetComponent<PlayerInputHandler>().Setup(this);
+            }
         }
 
-        for (int i = pihs.Length - 1; i >= 0; i--)
-        {
-            pihs[i].gameObject.SetActive(false);
-            yield return null;
-        }
         yield return null;
-        for (int i = pihs.Length - 1; i >= 0; i--)
+        for (int i = 0; i < 4; i++)
         {
-            pihs[i].gameObject.SetActive(true);
-            yield return null;
+            if (GameInfo.playerInputObjs[3 - i])
+            {
+                GameInfo.playerInputObjs[3 - i].SetActive(false);
+            }
+        }
+
+        yield return null;
+        for (int i = 0; i < 4; i++)
+        {
+            if (GameInfo.playerInputObjs[3 - i])
+            {
+                GameInfo.playerInputObjs[3 - i].SetActive(true);
+            }
         }
     }
 }

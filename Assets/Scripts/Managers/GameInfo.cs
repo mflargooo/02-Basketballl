@@ -9,6 +9,8 @@ public class GameInfo : MonoBehaviour
     public static List<int> playerIndices = new List<int>();
     public static int[] characterSelectIndexes;
 
+    public static GameObject[] playerInputObjs = new GameObject[4];
+
     public static GameInfo instance {get ; private set; }
     public void Awake()
     {

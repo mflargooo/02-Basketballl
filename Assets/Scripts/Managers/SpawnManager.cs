@@ -28,7 +28,7 @@ public class SpawnManager : MonoBehaviour
     {
         float angle = Random.Range(0f, 360f);
         float dist = Random.Range(minRadius, maxRadius);
-        Vector3 spawnPos = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * dist;
+        Vector3 spawnPos = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * dist + Vector3.up * spawnCenter.position.y;
 
         return Instantiate(pickupPrefab, spawnPos, transform.rotation);
     }

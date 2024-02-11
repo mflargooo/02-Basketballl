@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private int playerID;
     [SerializeField] private Animator anim;
+    [SerializeField] private AudioClip dashClip;
 
     private Rigidbody rb;
 
@@ -66,6 +67,7 @@ public class PlayerController : MonoBehaviour
     {
         if (input != 0 && dct <= 0f && canMove)
         {
+            Camera.main.GetComponent<AudioSource>().PlayOneShot(dashClip);
             StartCoroutine(Dash());
         }
     }

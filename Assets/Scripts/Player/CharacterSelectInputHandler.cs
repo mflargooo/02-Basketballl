@@ -17,6 +17,7 @@ public class CharacterSelectInputHandler : MonoBehaviour
         pi = GetComponent<PlayerInput>();
         ssm = FindObjectOfType<SelectScreenManager>();
         ssm.AddPlayer(pi.playerIndex);
+        GameInfo.playerInputObjs[pi.playerIndex] = gameObject;
     }
 
     public void IncrCharacterIndex(CallbackContext context)
@@ -48,6 +49,7 @@ public class CharacterSelectInputHandler : MonoBehaviour
 
         ssm.Unready(pi.playerIndex);
         ssm.RemovePlayer(pi.playerIndex);
+        GameInfo.playerInputObjs[pi.playerIndex] = null;
     }
 
     public void OnDeviceRegain()
@@ -56,5 +58,6 @@ public class CharacterSelectInputHandler : MonoBehaviour
 
         ssm.Ready(pi.playerIndex);
         ssm.AddPlayer(pi.playerIndex);
+        GameInfo.playerInputObjs[pi.playerIndex] = gameObject;
     }
 }
