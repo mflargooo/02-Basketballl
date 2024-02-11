@@ -727,7 +727,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.5
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -3066,7 +3066,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit: {fileID: 8300000, guid: 100fc3ee856c5f94588d5e2a2a21bfb9, type: 3}
-  hup: {fileID: 8300000, guid: ebed6dd9588ffc54b987c10138ba4d28, type: 3}
+  hup: {fileID: 8300000, guid: ef3f8455385e94847ac8eee73f364e42, type: 3}
 --- !u!1 &356149185
 GameObject:
   m_ObjectHideFlags: 0
@@ -4209,7 +4209,6 @@ MonoBehaviour:
   placement: 4
   score: 0
   eggCt: 0
-  powerupID: -1
   id: 1
 --- !u!4 &531175486
 Transform:
@@ -7226,7 +7225,8 @@ MonoBehaviour:
   spawnCenter: {fileID: 955915078}
   minRadius: 10
   maxRadius: 17
-  maxPickups: 7
+  basePickups: 3
+  addPickupsPerPlayers: 2
 --- !u!114 &955915082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8628,7 +8628,6 @@ MonoBehaviour:
   placement: 4
   score: 0
   eggCt: 0
-  powerupID: -1
   id: 2
 --- !u!4 &1142300701
 Transform:
@@ -8712,7 +8711,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit: {fileID: 8300000, guid: 100fc3ee856c5f94588d5e2a2a21bfb9, type: 3}
-  hup: {fileID: 8300000, guid: ebed6dd9588ffc54b987c10138ba4d28, type: 3}
+  hup: {fileID: 8300000, guid: ef3f8455385e94847ac8eee73f364e42, type: 3}
 --- !u!1 &1196869558
 GameObject:
   m_ObjectHideFlags: 0
@@ -9868,7 +9867,6 @@ MonoBehaviour:
   placement: 4
   score: 0
   eggCt: 0
-  powerupID: -1
   id: 0
 --- !u!1 &1351496872
 GameObject:
@@ -9902,7 +9900,6 @@ MonoBehaviour:
   placement: 4
   score: 0
   eggCt: 0
-  powerupID: -1
   id: 3
 --- !u!4 &1351496874
 Transform:
@@ -9980,7 +9977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit: {fileID: 8300000, guid: 100fc3ee856c5f94588d5e2a2a21bfb9, type: 3}
-  hup: {fileID: 8300000, guid: ebed6dd9588ffc54b987c10138ba4d28, type: 3}
+  hup: {fileID: 8300000, guid: ef3f8455385e94847ac8eee73f364e42, type: 3}
 --- !u!1 &1398906002 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2305602873390032463, guid: 4bc282a70689e0e408e8790061fd8fab,
@@ -18274,7 +18271,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit: {fileID: 8300000, guid: 100fc3ee856c5f94588d5e2a2a21bfb9, type: 3}
-  hup: {fileID: 8300000, guid: ebed6dd9588ffc54b987c10138ba4d28, type: 3}
+  hup: {fileID: 8300000, guid: ef3f8455385e94847ac8eee73f364e42, type: 3}
 --- !u!1 &2000402862
 GameObject:
   m_ObjectHideFlags: 0

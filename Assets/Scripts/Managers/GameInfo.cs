@@ -11,7 +11,7 @@ public class GameInfo : MonoBehaviour
 
     public static GameObject[] playerInputObjs = new GameObject[4];
 
-    public static IList<List<int>> placementsLastToFirst;
+    public static SortedList<int, List<int>> placementsLastToFirst;
 
     public static GameInfo instance {get ; private set; }
     public void Awake()

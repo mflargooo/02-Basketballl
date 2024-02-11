@@ -30,6 +30,12 @@ public class SelectScreenManager : MonoBehaviour
 
     private void Start()
     {
+        PlayerInput[] inputs = FindObjectsOfType<PlayerInput>();
+        foreach(PlayerInput input in inputs)
+        {
+            Destroy(input.gameObject);
+        }
+
         pis = new PlayerInput[4];
         uiColors = new Color[4];
         for (int i = 0; i < 4; i++)

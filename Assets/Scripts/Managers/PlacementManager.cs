@@ -26,19 +26,23 @@ public class PlacementManager : MonoBehaviour
     public void AssignPodiums()
     {
         int numPlaces = GameInfo.placementsLastToFirst.Count;
-
-        for (int i = numPlaces - 1; i >= 0; i--)
+        int playersSet = 0;
+        for (int i = 0; i < numPlaces; i++)
         {
-            float podiumWidth = podiums[i].transform.localScale.z;
-            List<int> pids = GameInfo.placementsLastToFirst[i];
-            float delW = podiumWidth / (pids.Count + 1);
-            for (int j = 0; j < pids.Count; j++)
-            {
-                players[pids[j]].transform.position = new Vector3(podiums[i].transform.position.x + delW * (j + 1) - podiumWidth / 2f, podiums[i].transform.localScale.y, podiums[i].transform.position.z);
-                lookAt.position = lookAt.position + Vector3.up * (players[pids[j]].transform.position.y - lookAt.position.y);
-                players[pids[j]].transform.LookAt(lookAt);
-            }
+            List<int> sortedPIDs = GameInfo.placementsLastToFirst.Values[i];
 
+            float podiumWidth = podiums[i].transform.localScale.z;
+            float delW = podiumWidth / (sortedPIDs.Count + 1);
+
+                playersSet += sortedPIDs.Count;
+            for (int j = 0; j < sortedPIDs.Count; j++)
+            {
+                int placement = GameManager.GetNumPlayers() - playersSet;
+                players[sortedPIDs[j]].transform.position = new Vector3(podiums[numPlaces - i - 1].transform.position.x + delW * (j + 1) - podiumWidth / 2f, podiums[numPlaces - i - 1].transform.localScale.y, podiums[numPlaces - i - 1].transform.position.z);
+                lookAt.position = lookAt.position + Vector3.up * (players[sortedPIDs[j]].transform.position.y - lookAt.position.y);
+                players[sortedPIDs[j]].transform.LookAt(lookAt);
+
+            }
         }
     }
 }

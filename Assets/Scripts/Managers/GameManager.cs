@@ -75,7 +75,6 @@ public class GameManager : MonoBehaviour
 
     public void NewGame(List<int> indices)
     {
-        GameInfo.placementsLastToFirst = new List<List<int>>();
         playTenSecsLeft = false;
         endGame = false;
         gameTimer = gameTime;
@@ -124,7 +123,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(.1f);
 
 
-        GameInfo.placementsLastToFirst = UIManager.GetPlacements().Values;
+        GameInfo.placementsLastToFirst = UIManager.GetPlacements();
 
         quieterAS.PlayOneShot(whistleClip);
         yield return new WaitForSeconds(1.5f);

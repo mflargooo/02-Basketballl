@@ -33,12 +33,12 @@ public class PlayerEffects : MonoBehaviour
         if (invuln) yield return null;
         else 
         {
+            StartCoroutine(FlashModel(invulnTime + stunTime));
+            StartCoroutine(Invuln(invulnTime + stunTime));
             Camera.main.GetComponent<AudioSource>().PlayOneShot(GameManager.charSFX[pc.GetPlayerID()].hit);
             anim.Play(stun.name);
             Vector3 dir = hitBy.forward;
             transform.rotation = Quaternion.LookRotation((hitBy.position - transform.position).normalized, transform.up);
-            StartCoroutine(FlashModel(invulnTime + stunTime));
-            StartCoroutine(Invuln(invulnTime + stunTime));
             sh.InterruptGame();
             pc.DisableMovement();
             float kbTime = 0f;
