@@ -7,15 +7,13 @@ public class ResetEventFirst : MonoBehaviour
 {
     [SerializeField] private EventSystem es;
     [SerializeField] private GameObject playButton;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        if (!es.firstSelectedGameObject) es.firstSelectedGameObject = playButton;
+        es.SetSelectedGameObject(playButton);
+    }
+    public void SetSelectedGameObject(GameObject obj)
+    {
+        es.SetSelectedGameObject(obj);
     }
 }

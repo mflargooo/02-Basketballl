@@ -33,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     bool started;
 
+    private static int ballsInPlay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,6 +75,7 @@ public class GameManager : MonoBehaviour
 
     public void NewGame(List<int> indices)
     {
+        GameInfo.placementsLastToFirst = new List<List<int>>();
         playTenSecsLeft = false;
         endGame = false;
         gameTimer = gameTime;
@@ -86,7 +89,6 @@ public class GameManager : MonoBehaviour
             ps[i].placement = 1;
             ps[i].score = 0;
             ps[i].eggCt = 0;
-            ps[i].powerupID = -1;
         }
     }
 
@@ -121,10 +123,9 @@ public class GameManager : MonoBehaviour
         Camera.main.GetComponent<Animator>().Play("ZoomOut");
         yield return new WaitForSeconds(.1f);
 
-        foreach(int pid in GameInfo.playerIndices)
-        {
-            GameInfo.placements[pid] = ps[pid].placement;
-        }
+
+        GameInfo.placementsLastToFirst = UIManager.GetPlacements().Values;
+
         quieterAS.PlayOneShot(whistleClip);
         yield return new WaitForSeconds(1.5f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);

@@ -8,19 +8,23 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] private Transform spawnCenter;
     [SerializeField] private float minRadius;
     [SerializeField] private float maxRadius;
-    [SerializeField] private int maxPickups;
-    private GameObject[] spawned;
+    [SerializeField] private int basePickups = 3;
+    [SerializeField] private int addPickupsPerPlayers = 2;
 
+    private int maxPickups;
+    private static int livePickupCount = 0;
     void Start()
     {
-        spawned = new GameObject[maxPickups];
+        livePickupCount = 0;
+        maxPickups = basePickups + addPickupsPerPlayers * (GameInfo.playerIndices.Count - 1);
     }
     // Update is called once per frame
     void Update()
     {
-        for (int i = 0; i < maxPickups; i++)
+        if (livePickupCount < maxPickups)
         {
-            if (!spawned[i]) spawned[i] = SpawnNewPickup();
+            SpawnNewPickup();
+            livePickupCount++;
         }
     }
 
@@ -31,5 +35,10 @@ public class SpawnManager : MonoBehaviour
         Vector3 spawnPos = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * dist + Vector3.up * spawnCenter.position.y;
 
         return Instantiate(pickupPrefab, spawnPos, transform.rotation);
+    }
+
+    public static void DecrementPickup()
+    {
+        livePickupCount--;
     }
 }

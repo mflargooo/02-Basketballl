@@ -73,6 +73,28 @@ public class UIManager : MonoBehaviour
 
     public static void UpdatePlacements()
     {
+        SortedList<int, List<int>> scoreID = GetPlacements();
+
+        int playersSet = 0;
+        for (int i = 0; i < scoreID.Count; i++)
+        {
+            List<int> sortedPIDs = scoreID.Values[i];
+
+            playersSet += sortedPIDs.Count;
+            
+            foreach (int spid in sortedPIDs)
+            {
+                int placement = GameManager.GetNumPlayers() - playersSet + 1;
+                GameManager.ps[spid].placement = placement;
+                TMP_Text placementText = pi[spid].transform.GetChild(2).GetComponent<TMP_Text>();
+                placementText.text = placement.ToString();
+                placementText.color = pc[GameManager.GetNumPlayers() - playersSet];
+            }
+        }
+    }
+
+    public static SortedList<int, List<int>> GetPlacements()
+    {
         SortedList<int, List<int>> scoreID = new SortedList<int, List<int>>();
 
         foreach (int i in GameInfo.playerIndices)
@@ -83,18 +105,7 @@ public class UIManager : MonoBehaviour
             scoreID[score].Add(i);
         }
 
-        int playersSet = 0;
-        for (int i = 0; i < scoreID.Count; i++)
-        {
-            List<int> sortedPIDs = scoreID.Values[i];
-            playersSet += sortedPIDs.Count;
-            foreach (int spid in sortedPIDs)
-            {
-                TMP_Text placementText = pi[spid].transform.GetChild(2).GetComponent<TMP_Text>();
-                placementText.text = (GameManager.GetNumPlayers() - playersSet + 1).ToString();
-                placementText.color = pc[GameManager.GetNumPlayers() - playersSet];
-            }
-        }
+        return scoreID;
     }
 
     public static void UpdateClock(float time)

@@ -63,4 +63,9 @@ public class Projectile : MonoBehaviour
 
         Destroy(gameObject);
     }
+
+    private void OnDestroy()
+    {
+        SpawnManager.DecrementPickup();   
+    }
 }

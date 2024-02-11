@@ -7,6 +7,5 @@ public class PlayerStats : MonoBehaviour
     public int placement = 4;
     public int score = 0;
     public int eggCt = 0;
-    public int powerupID = -1;
     public int id = -1;
 }
