@@ -7,6 +7,8 @@ public class Collisions : MonoBehaviour
     private PlayerController pc;
 
     [SerializeField] private float dashToStunAngle;
+    [SerializeField] private AudioSource quieterAS;
+    [SerializeField] private AudioClip bballPickupClip;
     private void Start()
     {
         pc = transform.root.GetComponent<PlayerController>();
@@ -21,6 +23,16 @@ public class Collisions : MonoBehaviour
                 StartCoroutine(other.gameObject.GetComponent<PlayerEffects>().Stun(transform));
                 other.gameObject.GetComponent<Stealing>().stealing(transform.root.gameObject);
             }
+        }
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Egg" && GameManager.ps[pc.GetPlayerID()].GetComponent<PlayerStats>().eggCt < GameManager.GetMaxEggCount())
+        {
+            Destroy(other.gameObject);
+            quieterAS.PlayOneShot(bballPickupClip);
+            GameManager.ps[pc.GetPlayerID()].eggCt++;
+            UIManager.UpdateEggs(pc.GetPlayerID(), GameManager.ps[pc.GetPlayerID()].eggCt);
         }
     }
 

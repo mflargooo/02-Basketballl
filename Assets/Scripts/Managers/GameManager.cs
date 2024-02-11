@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -22,7 +23,12 @@ public class GameManager : MonoBehaviour
     public static CharacterSoundEffects[] charSFX;
     [SerializeField] private AudioClip[] announcerStartSounds;
     [SerializeField] private AudioClip tenSecsLeft;
+    [SerializeField] private AudioClip whistleClip;
+
     [SerializeField] private GameObject clock;
+
+    [SerializeField] private AudioSource quieterAS;
+    [SerializeField] private GameObject[] playerUIToDisableOnEnd;
     bool playTenSecsLeft;
 
     bool started;
@@ -101,9 +107,27 @@ public class GameManager : MonoBehaviour
 
     IEnumerator EndGame()
     {
-        yield return new WaitForSeconds(1f);
-        /*load win screen and track placements*/
-        NewGame(GameInfo.playerIndices);
+        for (int i = 0; i < 4; i++)
+        {
+            if (GameInfo.playerInputObjs[3 - i])
+            {
+                GameInfo.playerInputObjs[3 - i].SetActive(false);
+            }
+        }
+        foreach(GameObject obj in playerUIToDisableOnEnd)
+        {
+            obj.SetActive(false);
+        }
+        Camera.main.GetComponent<Animator>().Play("ZoomOut");
+        yield return new WaitForSeconds(.1f);
+
+        foreach(int pid in GameInfo.playerIndices)
+        {
+            GameInfo.placements[pid] = ps[pid].placement;
+        }
+        quieterAS.PlayOneShot(whistleClip);
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     IEnumerator BeginGame()

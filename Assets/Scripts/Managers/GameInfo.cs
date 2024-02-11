@@ -11,6 +11,8 @@ public class GameInfo : MonoBehaviour
 
     public static GameObject[] playerInputObjs = new GameObject[4];
 
+    public static int[] placements;
+
     public static GameInfo instance {get ; private set; }
     public void Awake()
     {

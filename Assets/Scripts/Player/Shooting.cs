@@ -111,7 +111,7 @@ public class Shooting : MonoBehaviour
     {
         Projectile ball = Instantiate(ballPrefab, transform.position, transform.rotation).GetComponent<Projectile>();
         float angle = Random.Range(0f, 360f);
-        Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle));
+        Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * 2f;
         ball.LaunchAt(GameManager.ps[playerID].id, scoreZone.position + offset, shootPower);
         ball.tag = "Untagged";
     }
