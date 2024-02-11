@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
         GameInfo.placementsLastToFirst = UIManager.GetPlacements();
 
         quieterAS.PlayOneShot(whistleClip);
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
