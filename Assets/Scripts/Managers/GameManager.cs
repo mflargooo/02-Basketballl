@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
 
         Camera.main.GetComponent<AudioSource>().PlayOneShot(selected);
 
-        yield return new WaitForSeconds(selected.length - .5f);
+        yield return new WaitForSeconds(selected.length - .75f);
         
         NewGame(GameInfo.playerIndices);
         clock.SetActive(true);

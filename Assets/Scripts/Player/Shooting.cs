@@ -96,7 +96,7 @@ public class Shooting : MonoBehaviour
             if (Mathf.Abs(acceleration) < 0.01f)
             {
                 acceleration = 0f;
-                CheckSuccess();
+                CheckSuccess(multiplier);
             }
         }
     }
@@ -135,17 +135,17 @@ public class Shooting : MonoBehaviour
     {
         if (bar != null && targetIndicator != null)
         {
-            targetIndicator.sizeDelta = new Vector2(targetIndicator.sizeDelta.x, 12.5f * multiplier);
+            targetIndicator.sizeDelta = new Vector2(targetIndicator.sizeDelta.x, 15f * multiplier);
             float targetPos = targetValue * bar.GetComponent<RectTransform>().sizeDelta.x;
             targetIndicator.anchoredPosition = new Vector2(targetPos - bar.GetComponent<RectTransform>().sizeDelta.x * 0.5f, targetIndicator.anchoredPosition.y);
         }
     }
 
-    void CheckSuccess()
+    void CheckSuccess(float multiplier)
     {
 
-        float successRangeStart = targetValue - targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f - .05f;
-        float successRangeEnd = targetValue + targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f + .05f;
+        float successRangeStart = targetValue - targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f - .025f * multiplier;
+        float successRangeEnd = targetValue + targetIndicator.sizeDelta.y / bar.GetComponent<RectTransform>().sizeDelta.x * .5f + .025f * multiplier;
 
         if (!skipThisGame)
         {

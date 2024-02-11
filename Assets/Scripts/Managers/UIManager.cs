@@ -8,11 +8,13 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] playerIcons;
     [SerializeField] private Color[] placementColors;
+    [SerializeField] private GameObject[] playerCameras;
 
     [SerializeField] private TMP_Text timerText;
 
     private static GameObject[] pi;
     private static Color[] pc;
+    private static GameObject[] pCams;
     private static TMP_Text tt;
 
     private void Awake()
@@ -20,8 +22,10 @@ public class UIManager : MonoBehaviour
         pi = playerIcons;
         pc = placementColors;
         tt = timerText;
+        pCams = playerCameras;
 
         foreach (GameObject p in pi) p.SetActive(false);
+        foreach (GameObject c in pCams) c.SetActive(false);
     }
 
     public static void SetupUI(List<int> indices)
@@ -63,7 +67,7 @@ public class UIManager : MonoBehaviour
 
     public static void UpdateScore(int pid, int score)
     {
-        pi[pid].transform.GetChild(3).GetComponent<TMP_Text>().text = "Score: " + score.ToString();
+        pi[pid].transform.GetChild(1).GetComponent<TMP_Text>().text = score.ToString();
         UpdatePlacements();
     }
 
@@ -101,10 +105,12 @@ public class UIManager : MonoBehaviour
     public static void EnablePlayer(int pid)
     {
         pi[pid].SetActive(true);
+        pCams[pid].SetActive(true);
     }
 
     public static void DisablePlayer(int pid)
     {
         pi[pid].SetActive(false);
+        pCams[pid].SetActive(false);
     }
 }
