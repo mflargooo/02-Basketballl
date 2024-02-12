@@ -7160,7 +7160,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameTime: 60
-  maxCarryEggs: 3
+  maxCarryEggs: 1
   players:
   - {fileID: 1699773809}
   - {fileID: 302521788}
@@ -11139,17 +11139,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0c384efc73c1b4849a20c1a0cdec940f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.75
+      value: 0.625
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c384efc73c1b4849a20c1a0cdec940f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.75
+      value: 0.625
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c384efc73c1b4849a20c1a0cdec940f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.75
+      value: 0.625
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0c384efc73c1b4849a20c1a0cdec940f,
         type: 3}
