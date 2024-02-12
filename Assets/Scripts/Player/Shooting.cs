@@ -96,6 +96,7 @@ public class Shooting : MonoBehaviour
             if (Mathf.Abs(acceleration) < 0.01f)
             {
                 acceleration = 0f;
+                anim.Play("Shoot");
                 CheckSuccess(multiplier);
             }
         }
@@ -193,5 +194,3 @@ public class Shooting : MonoBehaviour
         this.anim = anim;
     }
 }
-
-
