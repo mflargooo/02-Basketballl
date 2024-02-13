@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
+    [Header("Balls")]
     [SerializeField] private GameObject pickupPrefab;
     [SerializeField] private Transform spawnCenter;
     [SerializeField] private float minRadius;
@@ -15,6 +16,12 @@ public class SpawnManager : MonoBehaviour
 
     private int maxPickups;
     private static int livePickupCount = 0;
+
+    [Header("Powerups")]
+    [SerializeField] private GameObject doublePtsPUPrefab;
+    [SerializeField] private float doubleSpawnCooldown = 10f;
+    private GameObject spawnedDoublePts;
+
     void Start()
     {
         livePickupCount = 0;
@@ -22,27 +29,29 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < GameInfo.playerIndices.Count; i++)
         {
-            SpawnNewPickup(new Vector3(players[i].transform.position.x, spawnCenter.position.y, players[i].transform.position.z), players[i].transform.forward * 2.5f);
+            SpawnNewPickup(new Vector3(players[i].transform.position.x, spawnCenter.position.y, players[i].transform.position.z), players[i].transform.forward * 4f);
             livePickupCount++;
         }
+
+        StartCoroutine(SpawnPowerups());
     }
     // Update is called once per frame
     void Update()
     {
         if (livePickupCount < maxPickups)
         {
-            SpawnNewPickup();
+            RandomObjectSpawn(pickupPrefab, spawnCenter.transform.position);
             livePickupCount++;
         }
     }
 
-    private GameObject SpawnNewPickup()
+    private GameObject RandomObjectSpawn(GameObject obj, Vector3 center)
     {
         float angle = Random.Range(0f, 360f);
         float dist = Random.Range(minRadius, maxRadius);
-        Vector3 spawnPos = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * dist + Vector3.up * spawnCenter.position.y;
+        Vector3 spawnPos = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * dist + center;
 
-        return Instantiate(pickupPrefab, spawnPos, transform.rotation);
+        return Instantiate(obj, spawnPos, transform.rotation);
     }
 
     /* from is start position, to is displacement */
@@ -54,5 +63,18 @@ public class SpawnManager : MonoBehaviour
     public static void DecrementPickup()
     {
         livePickupCount--;
+    }
+
+    IEnumerator SpawnPowerups()
+    {
+        while (true)
+        {
+            if (spawnedDoublePts) yield return null;
+            else
+            {
+                yield return new WaitForSeconds(doubleSpawnCooldown);
+                spawnedDoublePts = RandomObjectSpawn(doublePtsPUPrefab, spawnCenter.transform.position);
+            }
+        }
     }
 }

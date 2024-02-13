@@ -1516,59 +1516,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 187946315}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &192187093
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 470160726204239601, guid: a902e96d8101643db9757e7548f37729,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 470160726204239601, guid: a902e96d8101643db9757e7548f37729,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470160726204239601, guid: a902e96d8101643db9757e7548f37729,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470160726204239601, guid: a902e96d8101643db9757e7548f37729,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470160726204239601, guid: a902e96d8101643db9757e7548f37729,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470160726204239601, guid: a902e96d8101643db9757e7548f37729,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 470160726204239601, guid: a902e96d8101643db9757e7548f37729,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7976028532147705246, guid: a902e96d8101643db9757e7548f37729,
-        type: 3}
-      propertyPath: m_Name
-      value: power-ups
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a902e96d8101643db9757e7548f37729, type: 3}
 --- !u!1 &260389960
 GameObject:
   m_ObjectHideFlags: 0
@@ -7466,6 +7413,9 @@ MonoBehaviour:
   - {fileID: 302521788}
   - {fileID: 733143586}
   - {fileID: 143020305}
+  doublePtsPUPrefab: {fileID: 7976028532147705246, guid: a902e96d8101643db9757e7548f37729,
+    type: 3}
+  doubleSpawnCooldown: 10
 --- !u!114 &955915082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19234,4 +19184,3 @@ SceneRoots:
   - {fileID: 327150929}
   - {fileID: 1252517318}
   - {fileID: 132405054}
-  - {fileID: 192187093}
