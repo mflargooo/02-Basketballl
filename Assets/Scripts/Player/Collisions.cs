@@ -5,6 +5,7 @@ using UnityEngine;
 public class Collisions : MonoBehaviour
 {
     private PlayerController pc;
+    private Shooting sh;
 
     [SerializeField] private float dashToStunAngle;
     [SerializeField] private AudioSource quieterAS;
@@ -12,6 +13,7 @@ public class Collisions : MonoBehaviour
     private void Start()
     {
         pc = transform.root.GetComponent<PlayerController>();
+        sh = transform.root.GetComponent<Shooting>();
     }
     private void OnTriggerStay(Collider other)
     {
@@ -33,6 +35,13 @@ public class Collisions : MonoBehaviour
             quieterAS.PlayOneShot(bballPickupClip);
             GameManager.ps[pc.GetPlayerID()].eggCt++;
             UIManager.UpdateEggs(pc.GetPlayerID(), GameManager.ps[pc.GetPlayerID()].eggCt);
+        }
+        else if(other.gameObject.tag == "Powerup" && !sh.GetNextShotDoubled())
+        {
+            Destroy(other.gameObject);
+            /* play pickup sound*/
+            sh.SetNextShotDoubled(true);
+            UIManager.DisplayDoubleIndicator(pc.GetPlayerID(), true);
         }
     }
 

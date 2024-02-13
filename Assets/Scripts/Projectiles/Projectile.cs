@@ -10,6 +10,8 @@ public class Projectile : MonoBehaviour
     [SerializeField] private float delayDestroyTime;
     [SerializeField] private float disappearTime;
 
+    private bool isDoubled;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -44,6 +46,11 @@ public class Projectile : MonoBehaviour
         return whoShot;
     }
 
+    public bool GetIsDoublePoints()
+    {
+        return isDoubled;
+    }
+
     public float GetStartDistance()
     {
         return startDistance;
@@ -62,6 +69,11 @@ public class Projectile : MonoBehaviour
         }
 
         Destroy(gameObject);
+    }
+
+    public void SetNextShotDoubled(bool b)
+    {
+        isDoubled = b;
     }
 
     private void OnDestroy()
