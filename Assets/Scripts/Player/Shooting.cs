@@ -34,6 +34,8 @@ public class Shooting : MonoBehaviour
     float accelGR;
     float multiplier;
 
+    private bool nextShotDoubled;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -106,6 +108,9 @@ public class Shooting : MonoBehaviour
     {
         Projectile ball = Instantiate(ballPrefab, transform.position, transform.rotation).GetComponent<Projectile>();
         ball.LaunchAt(GameManager.ps[playerID].id, scoreZone.position, shootPower);
+        ball.SetNextShotDoubled(nextShotDoubled);
+        nextShotDoubled = false;
+        UIManager.DisplayDoubleIndicator(pc.GetPlayerID(), false);
     }
 
     void ShootMiss()
@@ -115,6 +120,8 @@ public class Shooting : MonoBehaviour
         Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * 2f;
         ball.LaunchAt(GameManager.ps[playerID].id, scoreZone.position + offset, shootPower);
         ball.tag = "Untagged";
+        SetNextShotDoubled(false);
+        UIManager.DisplayDoubleIndicator(pc.GetPlayerID(), false);
     }
 
     void ResetGame()
@@ -192,5 +199,15 @@ public class Shooting : MonoBehaviour
     public void SetAnimator(Animator anim)
     {
         this.anim = anim;
+    }
+
+    public void SetNextShotDoubled(bool b)
+    {
+        nextShotDoubled = b;
+    }
+
+    public bool GetNextShotDoubled()
+    {
+        return nextShotDoubled;
     }
 }

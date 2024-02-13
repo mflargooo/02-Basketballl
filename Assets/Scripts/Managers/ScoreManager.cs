@@ -37,6 +37,8 @@ public class ScoreManager : MonoBehaviour
             else if (dist < largeRingRadius + .25f)
                 pts = 3;
 
+            if (ball.GetIsDoublePoints()) pts *= 2;
+
             int pid = ball.GetWhoShot();
             GameManager.ps[pid].score += pts;
             UIManager.UpdateScore(pid, GameManager.ps[pid].score);

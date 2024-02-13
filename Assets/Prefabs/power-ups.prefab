@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2316290580717844744}
   m_Layer: 3
   m_Name: power-ups
-  m_TagString: Undefined
+  m_TagString: Powerup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -63,7 +63,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 3c85ad937bce44ddfbae4215045106ab, type: 2}
-  - {fileID: 2100000, guid: 99899e9939c674ddc9d1aadc44cde3d6, type: 2}
+  - {fileID: 2100000, guid: 5ab4156cf8032d047b68277b60821a42, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
