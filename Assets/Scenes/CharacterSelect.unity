@@ -970,7 +970,7 @@ GameObject:
   - component: {fileID: 344108062}
   - component: {fileID: 344108061}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Controls Page
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1071,7 +1071,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a2f1a5b35e04c8145a47062b46f53cf8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f917941a51ad56f40ade304358ccf0db, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2811,7 +2811,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 1, g: 1, b: 1, a: 0}
+  m_BackGroundColor: {r: 0.40784317, g: 0.34117648, b: 0.34117648, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
