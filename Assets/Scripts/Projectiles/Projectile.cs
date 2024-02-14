@@ -8,7 +8,7 @@ public class Projectile : MonoBehaviour
     private int whoShot;
     private float startDistance;
     [SerializeField] private float delayDestroyTime;
-    [SerializeField] private float disappearTime;
+    [SerializeField] private float reactivateTime;
 
     private bool isDoubled;
 
@@ -16,7 +16,16 @@ public class Projectile : MonoBehaviour
     void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        StartCoroutine(Disappear(delayDestroyTime, disappearTime));
+        transform.GetChild(0).gameObject.tag = "Untagged";
+        StartCoroutine(ReactivateAfterTime(reactivateTime));
+    }
+
+    private void Update()
+    {
+        if (rb.velocity.y == 0)
+        {
+            rb.velocity *= .97f;
+        }
     }
 
     public void LaunchAt(int pid, Vector3 target, float launchStrength)
@@ -56,28 +65,14 @@ public class Projectile : MonoBehaviour
         return startDistance;
     }
 
-    public IEnumerator Disappear(float delay, float time)
+    public IEnumerator ReactivateAfterTime(float time)
     {
-        yield return new WaitForSeconds(delay);
-        float startTime = time;
-        Vector3 startScale = transform.localScale;
-        while(time > 0)
-        {
-            time -= Time.deltaTime;
-            transform.localScale = startScale * (time / startTime);
-            yield return null;
-        }
-
-        Destroy(gameObject);
+        yield return new WaitForSeconds(time);
+        transform.GetChild(0).gameObject.tag = "Egg";
     }
 
     public void SetNextShotDoubled(bool b)
     {
         isDoubled = b;
-    }
-
-    private void OnDestroy()
-    {
-        SpawnManager.DecrementPickup();   
     }
 }

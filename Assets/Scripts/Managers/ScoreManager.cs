@@ -42,7 +42,7 @@ public class ScoreManager : MonoBehaviour
             int pid = ball.GetWhoShot();
             GameManager.ps[pid].score += pts;
             UIManager.UpdateScore(pid, GameManager.ps[pid].score);
-
+            SpawnManager.DecrementPickup();
             Destroy(ball.gameObject, .1f);
             audioSource.PlayOneShot(swooshClip);
         }

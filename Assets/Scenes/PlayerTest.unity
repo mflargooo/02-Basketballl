@@ -7401,10 +7401,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd424515cdb6b894d8a198d9b18d406d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupPrefab: {fileID: 7976028532147705246, guid: ed87060c2f0c0384eb2262bc407e4189,
+  pickupPrefab: {fileID: 4128837787339499364, guid: 4ba018f65e687ad449e90c1e2af63d1d,
     type: 3}
   spawnCenter: {fileID: 955915078}
-  minRadius: 10
+  minRadius: 7
   maxRadius: 17
   basePickups: 3
   addPickupsPerPlayers: 2
@@ -10853,9 +10853,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d30ddab5c207a2c48a30b4a12a32a1e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallRingRadius: 3
-  medRingRadius: 6
-  largeRingRadius: 9
+  smallRingRadius: 4
+  medRingRadius: 8
+  largeRingRadius: 12
   rings:
   - {fileID: 280677708}
   - {fileID: 1764812329}

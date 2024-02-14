@@ -31,7 +31,7 @@ public class Collisions : MonoBehaviour
     {
         if (other.gameObject.tag == "Egg" && GameManager.ps[pc.GetPlayerID()].GetComponent<PlayerStats>().eggCt < GameManager.GetMaxEggCount())
         {
-            Destroy(other.gameObject);
+            Destroy(other.transform.root.gameObject);
             quieterAS.PlayOneShot(bballPickupClip);
             GameManager.ps[pc.GetPlayerID()].eggCt++;
             UIManager.UpdateEggs(pc.GetPlayerID(), GameManager.ps[pc.GetPlayerID()].eggCt);
