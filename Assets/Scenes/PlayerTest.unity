@@ -7038,10 +7038,10 @@ MonoBehaviour:
   - {fileID: 1183067943}
   - {fileID: 988279058}
   placementColors:
-  - {r: 1, g: 0.78039217, b: 0, a: 1}
-  - {r: 0.6039216, g: 0.6039216, b: 0.6039216, a: 1}
-  - {r: 0.94509804, g: 0.43529412, b: 0, a: 1}
-  - {r: 0.6509804, g: 0, b: 0.5803922, a: 1}
+  - {r: 1, g: 0.83137256, b: 0.83137256, a: 1}
+  - {r: 0.72156864, g: 0.47843137, b: 0.8, a: 1}
+  - {r: 0.62352943, g: 0.8784314, b: 0.8235294, a: 1}
+  - {r: 0.9743556, g: 1, b: 0.63584906, a: 1}
   playerCameras:
   - {fileID: 272938266}
   - {fileID: 371849941}
@@ -7404,8 +7404,8 @@ MonoBehaviour:
   pickupPrefab: {fileID: 4128837787339499364, guid: 4ba018f65e687ad449e90c1e2af63d1d,
     type: 3}
   spawnCenter: {fileID: 955915078}
-  minRadius: 7
-  maxRadius: 17
+  minRadius: 4
+  maxRadius: 15
   basePickups: 3
   addPickupsPerPlayers: 2
   players:
