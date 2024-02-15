@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17511088, g: 0.21907213, b: 0.3013723, a: 1}
+  m_IndirectSpecularColor: {r: 0.17511037, g: 0.2190717, b: 0.30137107, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -7413,8 +7413,11 @@ MonoBehaviour:
   - {fileID: 302521788}
   - {fileID: 733143586}
   - {fileID: 143020305}
-  doublePtsPUPrefab: {fileID: 7976028532147705246, guid: a902e96d8101643db9757e7548f37729,
-    type: 3}
+  doublePtsPUPrefab:
+  - {fileID: 8674343265905537517, guid: 596c1f128dbf74af186add9ee671b76c, type: 3}
+  - {fileID: 8674343265905537517, guid: 4b28531d868ae4d2fa305a222e9e65f5, type: 3}
+  - {fileID: 8674343265905537517, guid: 8e997c541396c4438b0f61198dec1a86, type: 3}
+  - {fileID: 8674343265905537517, guid: 42c0e3c332ab24b519b296a237e087f7, type: 3}
   doubleSpawnCooldown: 10
 --- !u!114 &955915082
 MonoBehaviour:

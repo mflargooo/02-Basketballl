@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
     private static int livePickupCount = 0;
 
     [Header("Powerups")]
-    [SerializeField] private GameObject doublePtsPUPrefab;
+    [SerializeField] private GameObject[] doublePtsPUPrefab = new GameObject[4];
     [SerializeField] private float doubleSpawnCooldown = 10f;
     private GameObject spawnedDoublePts;
 
@@ -56,7 +56,7 @@ public class SpawnManager : MonoBehaviour
 
     /* from is start position, to is displacement */
     private GameObject SpawnNewPickup(Vector3 from, Vector3 to)
-    {
+    {   
         return Instantiate(pickupPrefab, from + to, transform.rotation);
     }
 
@@ -73,7 +73,8 @@ public class SpawnManager : MonoBehaviour
             else
             {
                 yield return new WaitForSeconds(doubleSpawnCooldown);
-                spawnedDoublePts = RandomObjectSpawn(doublePtsPUPrefab, spawnCenter.transform.position);
+                int index = Random.Range(0, doublePtsPUPrefab.Length);
+                spawnedDoublePts = RandomObjectSpawn(doublePtsPUPrefab[index], spawnCenter.transform.position);
             }
         }
     }
