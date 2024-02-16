@@ -12,10 +12,13 @@ public class ScoreManager : MonoBehaviour
 
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip swooshClip;
+    [SerializeField] private ParticleSystem ps;
+    private ParticleSystem.MainModule main;
 
     private float[] shootingRanges;
     private void Awake()
     {
+        main = ps.main;
         rings[0].transform.localScale = new Vector3(smallRingRadius * 2f, smallRingRadius * 2f, 1f);
         rings[1].transform.localScale = new Vector3(medRingRadius * 2f, medRingRadius * 2f, 1f);
         rings[2].transform.localScale = new Vector3(largeRingRadius * 2f, largeRingRadius * 2f, 1f);
@@ -43,6 +46,8 @@ public class ScoreManager : MonoBehaviour
             GameManager.ps[pid].score += pts;
             UIManager.UpdateScore(pid, GameManager.ps[pid].score);
             SpawnManager.DecrementPickup();
+            main.startColor = GameManager.pc[pid];
+            ps.Play();
             Destroy(ball.gameObject, .1f);
             audioSource.PlayOneShot(swooshClip);
         }
