@@ -97,3 +97,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amplitude: 0.2
   frequency: 3
+  rotateSpeed: 15

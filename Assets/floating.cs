@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class floating : MonoBehaviour
 {
-    public float amplitude = 0.02f;
-    public float frequency = 1f;
+    [SerializeField] float amplitude = 0.02f;
+    [SerializeField] float frequency = 1f;
+    [SerializeField] private float rotateSpeed;
 
     private Vector3 startPos;
     // Start is called before the first frame update
@@ -20,6 +21,8 @@ public class floating : MonoBehaviour
         Vector3 newPos = startPos;
         newPos.y += Mathf.Sin(Time.time * frequency) * amplitude;
         transform.position = newPos;
+
+        transform.Rotate(rotateSpeed * Vector3.up * Time.deltaTime);
 
     }
 }
