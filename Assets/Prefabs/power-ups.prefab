@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 470160726204239601}
+  - component: {fileID: 276398736970056845}
   m_Layer: 0
   m_Name: power-ups
   m_TagString: Powerup
@@ -32,6 +33,21 @@ Transform:
   - {fileID: 4827560843671137407}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &276398736970056845
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7976028532147705246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10dedca7ee21c42e99b74a45c02a421c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amplitude: 0.02
+  frequency: 1
+  rotateSpeed: 15
 --- !u!1001 &5004704800443927444
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -107,9 +123,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: fe0a3484add812e4c89bdbf05e3d464b,
         type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: fe0a3484add812e4c89bdbf05e3d464b,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5a30d2e94c8b6654a88555edda0e760d, type: 2}
+    - target: {fileID: -7511558181221131132, guid: fe0a3484add812e4c89bdbf05e3d464b,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1eaad7ffc19444b46914847b7556aecb, type: 2}
     - target: {fileID: 919132149155446097, guid: fe0a3484add812e4c89bdbf05e3d464b,
         type: 3}
       propertyPath: m_Name
