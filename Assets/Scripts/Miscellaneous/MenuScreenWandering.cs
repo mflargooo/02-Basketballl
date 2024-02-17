@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class MenuScreenWandering : MonoBehaviour
 {
-    [SerializeField] private GameObject wandererPrefab;
-    [SerializeField] private uint numWanderers;
+    [SerializeField] private GameObject[] wandererPrefabs;
+    //[SerializeField] private uint numWanderers;
     [SerializeField] private float wanderSpeed;
     [SerializeField] private float rotateSpeed;
     private Vector3 center;
@@ -17,11 +17,12 @@ public class MenuScreenWandering : MonoBehaviour
     void Start()
     {
         center = transform.position;
-        for(int i = 0; i < numWanderers; i++)
+        for(int i = 0; i < wandererPrefabs.Length; i++)
         {
-            Vector3 xOffset = Vector3.right * (Random.Range(0f, 1f) < .5 ? 1 : -1) * (Random.Range(wanderRange.x, wanderRange.x + 2f));
-            Vector3 zOffset = Vector3.forward * (Random.Range(0f, 1f) < .5 ? 1 : -1) * (Random.Range(wanderRange.y, wanderRange.y + 3f));
-            GameObject wanderer = Instantiate(wandererPrefab, center + xOffset + zOffset, transform.rotation);
+            Vector3 xOffset = Vector3.right * (Random.Range(0f, 1f) < .5 ? 1 : -1) * (Random.Range(wanderRange.x, wanderRange.x + 1f));
+            Vector3 zOffset = Vector3.forward * (Random.Range(0f, 1f) < .5 ? 1 : -1) * (Random.Range(wanderRange.y, wanderRange.y + 1f));
+            GameObject wanderer = Instantiate(wandererPrefabs[i], center + xOffset + zOffset, transform.rotation);
+            wanderer.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             StartCoroutine(Wander(wanderer));
         }
     }
@@ -39,8 +40,9 @@ public class MenuScreenWandering : MonoBehaviour
         {
             if ((target - obj.transform.position).magnitude <= .1f)
             {
-                yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
                 target = ChooseNewWanderPoint();
+                yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
+                
             }
             else
             {

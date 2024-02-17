@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -428,7 +428,7 @@ Transform:
   m_GameObject: {fileID: 341433904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4, y: 1, z: 6}
+  m_LocalPosition: {x: 2, y: 1, z: 3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -446,12 +446,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfebca2794206ed40a78a7645ba05093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wandererPrefab: {fileID: 5651084830864375451, guid: fd4e6195084b47e4aae0bfcfca70ec69,
-    type: 3}
-  numWanderers: 7
-  wanderSpeed: 3
+  wandererPrefabs:
+  - {fileID: 4483249493431779623, guid: 15d5a643cde8c4fe197e3c42e9e4b81e, type: 3}
+  - {fileID: 5801570337468919713, guid: 6175d3331f3124639bcb4818df6714ac, type: 3}
+  - {fileID: 2962983964747774756, guid: 91daf4ee7328d4819a6f3c1050b35cd6, type: 3}
+  - {fileID: 3530523397844171381, guid: 2c03cda9c1b294815867ceeb344ba52e, type: 3}
+  wanderSpeed: 1
   rotateSpeed: 2
-  wanderRange: {x: 15, y: 7}
+  wanderRange: {x: 5, y: 4}
   minWaitTime: 2
   maxWaitTime: 5
 --- !u!1 &422772904
