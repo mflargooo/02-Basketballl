@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.17511088, g: 0.21907213, b: 0.3013723, a: 1}
+  m_IndirectSpecularColor: {r: 0.17511037, g: 0.2190717, b: 0.30137107, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1455,7 +1455,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f8a41c92ff7ea4fd5ae05a41671c6156, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -2311,6 +2311,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 367738843163076174}
     m_Modifications:
+    - target: {fileID: -6348629653522461038, guid: 43849acf73029f94088be32bd19d02ac,
+        type: 3}
+      propertyPath: hit
+      value: 
+      objectReference: {fileID: 8300000, guid: 9a185e267bd834cf58605e5d31865b51, type: 3}
+    - target: {fileID: -6348629653522461038, guid: 43849acf73029f94088be32bd19d02ac,
+        type: 3}
+      propertyPath: hup
+      value: 
+      objectReference: {fileID: 8300000, guid: a08f0e0c5adc241e7be1c13bb241d65d, type: 3}
     - target: {fileID: 2883641741133671784, guid: 43849acf73029f94088be32bd19d02ac,
         type: 3}
       propertyPath: m_Name
@@ -3252,6 +3262,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 367738843163076174}
     m_Modifications:
+    - target: {fileID: 1756628270455561711, guid: e9aa1823738f8d84899ab7574ad7ab59,
+        type: 3}
+      propertyPath: hit
+      value: 
+      objectReference: {fileID: 8300000, guid: 3511ee04416594f07945344bae2f5288, type: 3}
+    - target: {fileID: 1756628270455561711, guid: e9aa1823738f8d84899ab7574ad7ab59,
+        type: 3}
+      propertyPath: hup
+      value: 
+      objectReference: {fileID: 8300000, guid: 8b5c4d782541948c192821ae844865f6, type: 3}
     - target: {fileID: 7482272476356925349, guid: e9aa1823738f8d84899ab7574ad7ab59,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4955,6 +4975,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4159408307169856545, guid: e03ce6631940c494f8cfa07f8b606c14,
+        type: 3}
+      propertyPath: hit
+      value: 
+      objectReference: {fileID: 8300000, guid: 2bb42f1bac911417898eb9d47ed18bc5, type: 3}
+    - target: {fileID: 4159408307169856545, guid: e03ce6631940c494f8cfa07f8b606c14,
+        type: 3}
+      propertyPath: hup
+      value: 
+      objectReference: {fileID: 8300000, guid: 21f30e4cd50694b3799a58eb84b0afc3, type: 3}
     - target: {fileID: 6937330258356657670, guid: e03ce6631940c494f8cfa07f8b606c14,
         type: 3}
       propertyPath: m_Name
@@ -5510,9 +5540,9 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 0, a: 0}
   - {r: 0, g: 1, b: 0, a: 0}
   announcerStartSounds:
-  - {fileID: 8300000, guid: 43e2e1f27af187945b35c5aba7dc26da, type: 3}
-  - {fileID: 8300000, guid: 9ca003c065447ef43b1640759de17d6c, type: 3}
-  tenSecsLeft: {fileID: 8300000, guid: 314eb56777c2218449a70d42145a183f, type: 3}
+  - {fileID: 8300000, guid: 8b3e104772bd84fb78419dd105d28a37, type: 3}
+  - {fileID: 8300000, guid: ddcdfb11b01a444a39502efeaa2694a8, type: 3}
+  tenSecsLeft: {fileID: 8300000, guid: 43fcb29cd700842568409eaf8a575238, type: 3}
   whistleClip: {fileID: 8300000, guid: 7b32cfb318ed9174bb1787adeaf59146, type: 3}
   clock: {fileID: 534404257}
   quieterAS: {fileID: 132405055}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2013,10 +2013,10 @@ MonoBehaviour:
   - {fileID: 1744970079}
   - {fileID: 913894152}
   charSelectSFX:
-  - {fileID: 8300000, guid: 1dbf3e587bfd34877bd04ce9080965b2, type: 3}
-  - {fileID: 8300000, guid: 2368bf29894171a46967b92f29e038ae, type: 3}
-  - {fileID: 8300000, guid: 8fe2f2a1a00eb4f0ba1acd93278779f1, type: 3}
-  - {fileID: 8300000, guid: ebed6dd9588ffc54b987c10138ba4d28, type: 3}
+  - {fileID: 8300000, guid: a6a78d086953e44b69d10df394bccb6f, type: 3}
+  - {fileID: 8300000, guid: 925e7e9e00c53400f96a5d0148f1c176, type: 3}
+  - {fileID: 8300000, guid: dea1295b82aed4babacfe491bb446d1d, type: 3}
+  - {fileID: 8300000, guid: e4935db4b82e649d9a935c0f288d4e51, type: 3}
   menuArrows: {fileID: 8300000, guid: 58b4ef056e4dd44fe9b351d7b074ed87, type: 3}
   readyClip: {fileID: 8300000, guid: 30ec3c3256f4a46328e6fe078d296f8f, type: 3}
   joinClip: {fileID: 8300000, guid: a823bcdc0227748c4b10d2b99b9ba9e5, type: 3}
@@ -2922,7 +2922,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 370e77ae249214b8eb782a248b9ccbae, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.8
   m_Pitch: 1
