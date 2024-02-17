@@ -33,8 +33,6 @@ public class GameManager : MonoBehaviour
 
     bool started;
 
-    private static int ballsInPlay;
-
     // Start is called before the first frame update
     void Start()
     {

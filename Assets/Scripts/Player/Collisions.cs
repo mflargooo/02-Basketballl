@@ -39,9 +39,8 @@ public class Collisions : MonoBehaviour
         else if(other.gameObject.tag == "Powerup" && !sh.GetNextShotDoubled())
         {
             Destroy(other.gameObject);
-            /* play pickup sound*/
+            quieterAS.PlayOneShot(bballPickupClip);
             sh.SetNextShotDoubled(true);
-            UIManager.DisplayDoubleIndicator(pc.GetPlayerID(), true);
         }
     }
 

@@ -34,18 +34,21 @@ public class MenuScreenWandering : MonoBehaviour
 
     IEnumerator Wander(GameObject obj)
     {
-        Vector3 target = obj.transform.position;
-
-        while(true)
+        yield return new WaitForSeconds(Random.Range(0f, minWaitTime));
+        Animator anim = obj.GetComponent<Animator>();
+        Vector3 target = ChooseNewWanderPoint();
+        while (true)
         {
             if ((target - obj.transform.position).magnitude <= .1f)
             {
                 target = ChooseNewWanderPoint();
+                anim.SetBool("Moving", false);
                 yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
                 
             }
             else
             {
+                anim.SetBool("Moving", true);
                 Vector3 dir = (target - obj.transform.position).normalized;
                 float angle = Vector3.SignedAngle(obj.transform.forward, dir, transform.up);
                 obj.transform.Rotate(Vector3.up * angle * Time.deltaTime * rotateSpeed);

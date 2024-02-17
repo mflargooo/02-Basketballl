@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -428,7 +428,7 @@ Transform:
   m_GameObject: {fileID: 341433904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2, y: 1, z: 3}
+  m_LocalPosition: {x: 1.5, y: 1, z: 4}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -451,8 +451,8 @@ MonoBehaviour:
   - {fileID: 5801570337468919713, guid: 6175d3331f3124639bcb4818df6714ac, type: 3}
   - {fileID: 2962983964747774756, guid: 91daf4ee7328d4819a6f3c1050b35cd6, type: 3}
   - {fileID: 3530523397844171381, guid: 2c03cda9c1b294815867ceeb344ba52e, type: 3}
-  wanderSpeed: 1
-  rotateSpeed: 2
+  wanderSpeed: 0.8
+  rotateSpeed: 5
   wanderRange: {x: 5, y: 4}
   minWaitTime: 2
   maxWaitTime: 5
@@ -2231,7 +2231,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 55
+  field of view: 50
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -2258,7 +2258,7 @@ Transform:
   m_GameObject: {fileID: 1930342529}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 2.375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

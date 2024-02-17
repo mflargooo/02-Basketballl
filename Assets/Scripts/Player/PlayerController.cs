@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private int playerID;
     [SerializeField] private Animator anim;
     [SerializeField] private AudioClip dashClip;
+    [SerializeField] private GameObject dashParticles;
 
     private Rigidbody rb;
 
@@ -68,6 +69,8 @@ public class PlayerController : MonoBehaviour
         if (input != 0 && dct <= 0f && canMove)
         {
             Camera.main.GetComponent<AudioSource>().PlayOneShot(dashClip);
+            GameObject temp = Instantiate(dashParticles, transform.position + Vector3.up * .375f - transform.forward * .25f, transform.rotation);
+            Destroy(temp, .5f);
             StartCoroutine(Dash());
         }
     }

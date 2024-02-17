@@ -124,9 +124,4 @@ public class UIManager : MonoBehaviour
         pi[pid].SetActive(false);
         pCams[pid].SetActive(false);
     }
-
-    public static void DisplayDoubleIndicator (int pid, bool b)
-    {
-        pi[pid].transform.GetChild(3).gameObject.SetActive(b);
-    }
 }

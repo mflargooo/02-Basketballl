@@ -10,7 +10,6 @@ public class Shooting : MonoBehaviour
     private int playerID;
     public Slider bar;
     public RectTransform targetIndicator;
-    [SerializeField] private TMP_Text shotText;
     private float acceleration = 0f;
     [SerializeField] private float maxAcceleration;
     [SerializeField] private float accelGrowRate = 1f;
@@ -36,13 +35,15 @@ public class Shooting : MonoBehaviour
 
     private bool nextShotDoubled;
 
+    [SerializeField] private GameObject powerupParticles;
+    private GameObject powerupPartsInstance;
+
     // Start is called before the first frame update
     void Start()
     {
         playerID = pc.GetPlayerID();
         ScoreManager sm = hoop.GetComponent<ScoreManager>();
         shootRanges = sm.GetShootRanges();
-        shotText.gameObject.SetActive(false);
         ResetGame();
         accelGR = accelGrowRate;
     }
@@ -50,6 +51,13 @@ public class Shooting : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(!powerupPartsInstance && nextShotDoubled)
+        {
+            powerupPartsInstance = Instantiate(powerupParticles, transform.position, powerupParticles.transform.rotation);
+            powerupPartsInstance.transform.parent = transform;
+        }
+        else if (powerupPartsInstance && !nextShotDoubled) Destroy(powerupPartsInstance);
+
         Vector3 horzDisp = new Vector3(hoop.transform.position.x - transform.position.x, 0f, hoop.transform.position.z - transform.position.z);
 
         if (horzDisp.magnitude <= shootRanges[0])
@@ -109,7 +117,6 @@ public class Shooting : MonoBehaviour
         ball.LaunchAt(GameManager.ps[playerID].id, scoreZone.position, shootPower);
         ball.SetNextShotDoubled(nextShotDoubled);
         nextShotDoubled = false;
-        UIManager.DisplayDoubleIndicator(pc.GetPlayerID(), false);
     }
 
     void ShootMiss()
@@ -120,7 +127,6 @@ public class Shooting : MonoBehaviour
         ball.LaunchAt(GameManager.ps[playerID].id, scoreZone.position + offset, shootPower);
         ball.tag = "Untagged";
         SetNextShotDoubled(false);
-        UIManager.DisplayDoubleIndicator(pc.GetPlayerID(), false);
     }
 
     void ResetGame()
@@ -128,7 +134,6 @@ public class Shooting : MonoBehaviour
         bar.value = 0;
         bar.gameObject.SetActive(false);
         hasPlayed = false;
-        shotText.gameObject.SetActive(false);
         skipThisGame = false;
     }
 
@@ -160,26 +165,22 @@ public class Shooting : MonoBehaviour
             if (bar.value >= successRangeStart && bar.value <= successRangeEnd)
             {
                 ShootAt();
-                StartCoroutine(ShowTextAndReset("Success!"));
             }
             else
             {
                 ShootMiss();
-                StartCoroutine(ShowTextAndReset("Miss!"));
             }
+            StartCoroutine(Reset());
         }
 
         UIManager.UpdateEggs(GameManager.ps[playerID].id, --GameManager.ps[playerID].eggCt);
     }
 
-    IEnumerator ShowTextAndReset(string text)
+    IEnumerator Reset()
     {
         bar.gameObject.SetActive(false);
         pc.EnableMovement();
-        shotText.text = text;
-        shotText.gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
-        shotText.gameObject.SetActive(false);
         ResetGame();
     }
 

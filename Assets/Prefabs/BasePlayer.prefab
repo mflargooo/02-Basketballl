@@ -307,6 +307,8 @@ MonoBehaviour:
   playerID: 0
   anim: {fileID: 0}
   dashClip: {fileID: 0}
+  dashParticles: {fileID: 2046305242093312972, guid: 1c63a05d7d9c0044f94f031602136a5b,
+    type: 3}
 --- !u!114 &8672815330894053962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +325,6 @@ MonoBehaviour:
   rb: {fileID: 8262877802069617251}
   bar: {fileID: 0}
   targetIndicator: {fileID: 0}
-  shotText: {fileID: 0}
   maxAcceleration: 2
   accelGrowRate: 1
   shootPower: 1.25
@@ -332,6 +333,8 @@ MonoBehaviour:
   ballPrefab: {fileID: 4128837787339499364, guid: 4ba018f65e687ad449e90c1e2af63d1d,
     type: 3}
   anim: {fileID: 0}
+  powerupParticles: {fileID: 7309478088253644202, guid: e6db24b553fddda41afdfbf020363308,
+    type: 3}
 --- !u!114 &2976119033713565404
 MonoBehaviour:
   m_ObjectHideFlags: 0
