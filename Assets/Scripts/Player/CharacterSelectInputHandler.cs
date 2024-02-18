@@ -10,6 +10,9 @@ public class CharacterSelectInputHandler : MonoBehaviour
     private PlayerInput pi;
     private SelectScreenManager ssm;
 
+    private bool hasIncred;
+    private bool hasDecred;        
+
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -27,13 +30,21 @@ public class CharacterSelectInputHandler : MonoBehaviour
 
     public void IncrCharacterIndex(CallbackContext context)
     {
-        if(ssm)
-            ssm.SetCharacterIndex(pi.playerIndex, context.ReadValueAsButton() ? 1 : 0);
+        if (ssm && !hasIncred && context.ReadValueAsButton())
+        {
+            ssm.SetCharacterIndex(pi.playerIndex, 1);
+            hasIncred = true;
+        }
+        if (!context.ReadValueAsButton()) hasIncred = false;
     }
     public void DecrCharacterIndex(CallbackContext context)
     {
-        if (ssm)
-            ssm.SetCharacterIndex(pi.playerIndex, context.ReadValueAsButton() ? -1 : 0);
+        if (ssm && !hasDecred && context.ReadValueAsButton())
+        {
+            ssm.SetCharacterIndex(pi.playerIndex, -1);
+            hasDecred = true;
+        }
+        if (!context.ReadValueAsButton()) hasDecred = false;
     }
 
     public void Ready(CallbackContext context)
