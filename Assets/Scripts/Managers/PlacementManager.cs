@@ -33,10 +33,10 @@ public class PlacementManager : MonoBehaviour
                 model.SetActive(true);
 
                 int placement = GameManager.GetNumPlayers() - playersSet;
-                if (placement == 0) model.GetComponent<Animator>().Play("Victory");
-                else if (placement == 1) model.GetComponent<Animator>().Play("Waving");
-                else if (placement == 2) model.GetComponent<Animator>().Play("Kiss");
-                else model.GetComponent<Animator>().Play("Defeat");
+                if (placement == 0) model.GetComponent<Animator>().Play("1");
+                else if (placement == 1) model.GetComponent<Animator>().Play("2");
+                else if (placement == 2) model.GetComponent<Animator>().Play("3");
+                else model.GetComponent<Animator>().Play("4");
                 
                 players[pid].transform.position = new Vector3(podiums[numPlaces - i - 1].transform.position.x + delW * (j + 1) - podiumWidth / 2f, podiums[numPlaces - i - 1].transform.localScale.y, podiums[numPlaces - i - 1].transform.position.z);
                 lookAt.position = lookAt.position + Vector3.up * (players[pid].transform.position.y - lookAt.position.y);
