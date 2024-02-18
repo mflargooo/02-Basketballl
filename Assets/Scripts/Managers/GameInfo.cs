@@ -13,6 +13,8 @@ public class GameInfo : MonoBehaviour
 
     public static SortedList<int, List<int>> placementsLastToFirst;
 
+    public static bool isRematch;
+
     public static GameInfo instance {get ; private set; }
     public void Awake()
     {

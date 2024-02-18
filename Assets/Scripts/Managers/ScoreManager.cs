@@ -11,7 +11,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField] private GameObject[] rings;
 
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioSource twinkleSource;
     [SerializeField] private AudioClip swooshClip;
+    [SerializeField] private AudioClip twinkleClip;
     [SerializeField] private GameObject[] playerScoreParticles;
 
     private GameObject psInstance;
@@ -49,6 +51,7 @@ public class ScoreManager : MonoBehaviour
             Destroy(psInstance, 2f);
             Destroy(ball.gameObject, .1f);
             audioSource.PlayOneShot(swooshClip);
+            twinkleSource.PlayOneShot(twinkleClip);
         }
     }
 

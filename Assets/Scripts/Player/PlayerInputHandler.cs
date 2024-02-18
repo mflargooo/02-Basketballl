@@ -15,12 +15,10 @@ public class PlayerInputHandler : MonoBehaviour
     {
         pi = GetComponent<PlayerInput>();
     }
-    public void Setup(GameManager gm)
+    public void Setup(GameObject player)
     {
-        GameObject currPlayer = gm.GetPlayers()[pi.playerIndex];
-        currPlayer.SetActive(true);
-        pc = currPlayer.GetComponent<PlayerController>();
-        sh = currPlayer.GetComponent<Shooting>();
+        pc = player.GetComponent<PlayerController>();
+        sh = player.GetComponent<Shooting>();
 
         pi.ActivateInput();
 

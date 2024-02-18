@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.Playables;
 
 public class GameManager : MonoBehaviour
 {
@@ -125,24 +126,38 @@ public class GameManager : MonoBehaviour
 
         quieterAS.PlayOneShot(whistleClip);
         yield return new WaitForSeconds(3f);
+
+        GameInfo.isRematch = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     IEnumerator BeginGame()
     {
+        foreach (int pid in GameInfo.playerIndices)
+        {
+            players[pid].SetActive(true);
+
+            GameObject model = players[pid].transform.GetChild(1).GetChild(GameInfo.characterSelectIndexes[pid]).gameObject;
+            model.SetActive(true);
+            players[pid].GetComponent<PlayerController>().SetAnimator(model.GetComponent<Animator>());
+            players[pid].GetComponent<Shooting>().SetAnimator(model.GetComponent<Animator>());
+            players[pid].GetComponent<PlayerEffects>().SetAnimator(model.GetComponent<Animator>());
+            charSFX[pid] = model.GetComponent<CharacterSoundEffects>();
+        }
+
+        if (!GameInfo.isRematch)
+        {
+            PlayableDirector director = Camera.main.GetComponent<PlayableDirector>();
+            director.Play();
+            yield return new WaitForSeconds((float) director.duration);
+        }
+
         ResetPlayers();
         UIManager.SetupUI(GameInfo.playerIndices);
 
-        foreach (int i in GameInfo.playerIndices)
+        foreach (int pid in GameInfo.playerIndices)
         {
-            GameObject model = players[i].transform.GetChild(1).GetChild(GameInfo.characterSelectIndexes[i]).gameObject;
-            model.SetActive(true);
-            players[i].GetComponent<PlayerController>().SetAnimator(model.GetComponent<Animator>());
-            players[i].GetComponent<Shooting>().SetAnimator(model.GetComponent<Animator>());
-            players[i].GetComponent<PlayerEffects>().SetAnimator(model.GetComponent<Animator>());
-            charSFX[i] = model.GetComponent<CharacterSoundEffects>();
-
-            GameInfo.playerInputObjs[i].GetComponent<PlayerInputHandler>().Setup(this);
+            GameInfo.playerInputObjs[pid].GetComponent<PlayerInputHandler>().Setup(players[pid]);
         }
 
         AudioClip selected = null;
