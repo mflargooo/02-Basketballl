@@ -42,8 +42,8 @@ public class PlacementManager : MonoBehaviour
                 else if (placement == 2) model.GetComponent<Animator>().Play("3");
                 else model.GetComponent<Animator>().Play("4");
 
-                scoreTexts[numPlaces - i + 1].GetChild(0).GetComponent<TMP_Text>().text = scores[numPlaces - i - 1].ToString();
-                scoreTexts[numPlaces - i + 1].gameObject.SetActive(true);
+                scoreTexts[placement].GetChild(0).GetComponent<TMP_Text>().text = scores[numPlaces - placement - 1].ToString();
+                scoreTexts[placement].gameObject.SetActive(true);
 
                 players[pid].transform.position = new Vector3(podiums[numPlaces - i - 1].transform.position.x + delW * (j + 1) - podiumWidth / 2f, podiums[numPlaces - i - 1].transform.localScale.y, podiums[numPlaces - i - 1].transform.position.z);
                 lookAt.position = lookAt.position + Vector3.up * (players[pid].transform.position.y - lookAt.position.y);

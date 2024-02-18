@@ -13,6 +13,7 @@ public class SelectScreenManager : MonoBehaviour
     [SerializeField] private TMP_Text centerText;
     [SerializeField] private GameObject[] playerUI;
     [SerializeField] private GameObject[] models;
+    [SerializeField] private GameObject controlsPage;
 
     private List<int> playerIndices = new List<int>();
 
@@ -27,8 +28,11 @@ public class SelectScreenManager : MonoBehaviour
     [SerializeField] private AudioSource quieterAudio;
     [SerializeField] private AudioSource charSFXSource;
 
+    private bool fullLockdown;
+
     private void Awake()
     {
+        fullLockdown = false;
         lockState = false;
 
         uiColors = new Color[4];
@@ -58,6 +62,8 @@ public class SelectScreenManager : MonoBehaviour
 
     public void AddPlayer(int pid)
     {
+        if (fullLockdown) return;
+
         if (!playerIndices.Contains(pid))
         {
             playerIndices.Add(pid);
@@ -70,12 +76,16 @@ public class SelectScreenManager : MonoBehaviour
 
     public void ActivatePlayer(int pid) 
     {
+        if (fullLockdown) return;
+
         playerUI[pid].SetActive(true);
         models[pid].transform.GetChild(GameInfo.characterSelectIndexes[pid]).gameObject.SetActive(true);
     }
 
     public void RemovePlayer(int pid)
     {
+        if (fullLockdown) return;
+
         playerIndices.Remove(pid);
         GameInfo.playerInputObjs[pid] = null;
         DeactivatePlayer(pid);
@@ -84,6 +94,8 @@ public class SelectScreenManager : MonoBehaviour
 
     public void DeactivatePlayer(int pid)
     {
+        if (fullLockdown) return;
+
         playerUI[pid].SetActive(false);
         for (int i = 0; i < 4; i++)
         {
@@ -93,7 +105,8 @@ public class SelectScreenManager : MonoBehaviour
 
     public void Ready(int pid)
     {
-        if (playersReady[pid]) return;
+
+        if (playersReady[pid] || fullLockdown) return;
 
         playersReady[pid] = true;
         playerUI[pid].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
@@ -109,7 +122,7 @@ public class SelectScreenManager : MonoBehaviour
 
     private void CheckAllReady()
     {
-        if (playerIndices.Count < 2) return;
+        if (playerIndices.Count < 2 || fullLockdown) return;
         foreach (int idx in playerIndices)
         {
             if (!playersReady[idx]) return;
@@ -119,6 +132,8 @@ public class SelectScreenManager : MonoBehaviour
 
     public void Unready(int pid)
     {
+        if (fullLockdown) return;
+
         playersReady[pid] = false;
         playerUI[pid].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         playerUI[pid].transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
@@ -131,7 +146,7 @@ public class SelectScreenManager : MonoBehaviour
 
     public void SetCharacterIndex(int pid, int v)
     {
-        if (lockState || v == 0 || playersReady[pid]) return;
+        if (lockState || v == 0 || playersReady[pid] || fullLockdown) return;
 
         Camera.main.GetComponent<AudioSource>().PlayOneShot(menuArrows);
         models[pid].transform.GetChild(GameInfo.characterSelectIndexes[pid]).gameObject.SetActive(false);
@@ -155,8 +170,8 @@ public class SelectScreenManager : MonoBehaviour
             centerText.text = ((int)Mathf.Ceil(timer)).ToString();
             yield return null;
         }
-
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        fullLockdown = true;
+        controlsPage.SetActive(true);
     }
     public void StopCountdown()
     {

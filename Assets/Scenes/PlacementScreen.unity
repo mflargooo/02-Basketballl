@@ -4700,10 +4700,10 @@ MonoBehaviour:
   - {fileID: 70477733}
   - {fileID: 1466958857}
   scoreTexts:
-  - {fileID: 667457323}
-  - {fileID: 213516373}
-  - {fileID: 1709676099}
   - {fileID: 440682955}
+  - {fileID: 1709676099}
+  - {fileID: 213516373}
+  - {fileID: 667457323}
   lookAt: {fileID: 649546976}
 --- !u!1 &1752312731
 GameObject:
