@@ -6050,7 +6050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3a07363d0b70341810c288814e0718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameTime: 15
+  gameTime: 60
   maxCarryEggs: 1
   players:
   - {fileID: 6025330378167149594}
