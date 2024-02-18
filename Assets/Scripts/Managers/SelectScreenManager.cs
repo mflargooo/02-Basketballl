@@ -31,13 +31,6 @@ public class SelectScreenManager : MonoBehaviour
 
     private void Start()
     {
-        PlayerInput[] inputs = FindObjectsOfType<PlayerInput>();
-        foreach(PlayerInput input in inputs)
-        {
-            Destroy(input.gameObject);
-        }
-
-        pis = new PlayerInput[4];
         uiColors = new Color[4];
         for (int i = 0; i < 4; i++)
         {
@@ -46,9 +39,21 @@ public class SelectScreenManager : MonoBehaviour
         playersReady = new bool[4];
         characterSelectIndexes = new int[4];
 
-        foreach(GameObject pui in playerUI)
+        foreach (GameObject pui in playerUI)
         {
             pui.SetActive(false);
+        }
+
+        pis = new PlayerInput[4];
+
+        PlayerInput[] inputs = FindObjectsOfType<PlayerInput>();
+        foreach(PlayerInput input in inputs)
+        {
+            input.defaultActionMap = "UI";
+            input.ActivateInput();
+            ActivatePlayer(input.playerIndex);
+            pis[input.playerIndex] = input;
+
         }
     }
 
@@ -58,23 +63,33 @@ public class SelectScreenManager : MonoBehaviour
         {
             playerIndices.Add(pid);
         }
+        ActivatePlayer(pid);
+        Unready(pid);
+        StopCountdown();
+    }
+
+    public void ActivatePlayer(int pid) 
+    {
         playerUI[pid].SetActive(true);
         models[pid].transform.GetChild(characterSelectIndexes[pid]).gameObject.SetActive(true);
         quieterAudio.GetComponent<AudioSource>().PlayOneShot(joinClip);
-        Unready(pid);
-        StopCountdown();
     }
 
     public void RemovePlayer(int pid)
     {
         playerIndices.Remove(pid);
+        GameInfo.playerInputObjs[pid] = null;
+        DeactivatePlayer(pid);
+        StopCountdown();
+    }
+
+    public void DeactivatePlayer(int pid)
+    {
         playerUI[pid].SetActive(false);
-        for(int i= 0; i < 4; i++)
+        for (int i = 0; i < 4; i++)
         {
             models[pid].transform.GetChild(characterSelectIndexes[i]).gameObject.SetActive(false);
         }
-        GameInfo.playerInputObjs[pid] = null;
-        StopCountdown();
     }
 
     public void Ready(int pid)

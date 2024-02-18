@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         {
             if (GameInfo.playerInputObjs[3 - i])
             {
-                GameInfo.playerInputObjs[3 - i].SetActive(false);
+                GameInfo.playerInputObjs[3 - i].GetComponent<PlayerInput>().DeactivateInput();
             }
         }
         foreach(GameObject obj in playerUIToDisableOnEnd)

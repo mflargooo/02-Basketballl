@@ -135,6 +135,8 @@ public class Shooting : MonoBehaviour
         bar.gameObject.SetActive(false);
         hasPlayed = false;
         skipThisGame = false;
+        nextShotDoubled = false;
+        isPressing = false;
     }
 
     void SetTargetValue(float multiplier)
@@ -149,7 +151,7 @@ public class Shooting : MonoBehaviour
         {
             targetIndicator.sizeDelta = new Vector2(targetIndicator.sizeDelta.x, 15f * multiplier);
             float targetPos = targetValue * bar.GetComponent<RectTransform>().sizeDelta.x;
-            targetIndicator.anchoredPosition = new Vector2(targetPos - bar.GetComponent<RectTransform>().sizeDelta.x * 0.5f, targetIndicator.anchoredPosition.y);
+            targetIndicator.anchoredPosition = new Vector2(targetPos - bar.GetComponent<RectTransform>().sizeDelta.x * 0.5f + .025f, targetIndicator.anchoredPosition.y);
         }
     }
 
