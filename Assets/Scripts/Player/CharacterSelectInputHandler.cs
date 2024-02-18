@@ -20,6 +20,11 @@ public class CharacterSelectInputHandler : MonoBehaviour
         GameInfo.playerInputObjs[pi.playerIndex] = gameObject;
     }
 
+    private void OnLevelWasLoaded(int level)
+    {
+        if (level == 1) ssm = FindObjectOfType<SelectScreenManager>();
+    }
+
     public void IncrCharacterIndex(CallbackContext context)
     {
         if(ssm)

@@ -24,7 +24,8 @@ public class Projectile : MonoBehaviour
     {
         if (rb.velocity.y == 0)
         {
-            rb.velocity *= .97f;
+            rb.velocity *= .98f;
+            rb.angularVelocity *= .98f;
         }
     }
 

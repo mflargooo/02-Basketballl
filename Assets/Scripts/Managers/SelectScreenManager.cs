@@ -15,11 +15,9 @@ public class SelectScreenManager : MonoBehaviour
     [SerializeField] private GameObject[] models;
 
     private List<int> playerIndices = new List<int>();
-    private int[] characterSelectIndexes;
 
     private Color[] uiColors;
 
-    private PlayerInput[] pis;
     private bool lockState;
 
     [SerializeField] private AudioClip[] charSelectSFX;
@@ -29,32 +27,32 @@ public class SelectScreenManager : MonoBehaviour
     [SerializeField] private AudioSource quieterAudio;
     [SerializeField] private AudioSource charSFXSource;
 
-    private void Start()
+    private void Awake()
     {
+        lockState = false;
+
         uiColors = new Color[4];
         for (int i = 0; i < 4; i++)
         {
             uiColors[i] = playerUI[i].transform.GetChild(0).GetComponent<Image>().color;
         }
-        playersReady = new bool[4];
-        characterSelectIndexes = new int[4];
+        playersReady = new bool[4] { false, false, false, false };
 
         foreach (GameObject pui in playerUI)
         {
             pui.SetActive(false);
         }
 
-        pis = new PlayerInput[4];
-
-        PlayerInput[] inputs = FindObjectsOfType<PlayerInput>();
-        foreach(PlayerInput input in inputs)
+        foreach(GameObject obj in GameInfo.playerInputObjs)
         {
-            input.defaultActionMap = "UI";
+            if (!obj) continue;
+
+            PlayerInput input = obj.GetComponent<PlayerInput>();
+            playerIndices.Add(input.playerIndex);
+            input.SwitchCurrentActionMap("UI");
             input.ActivateInput();
             ActivatePlayer(input.playerIndex);
             Unready(input.playerIndex);
-            pis[input.playerIndex] = input;
-
         }
     }
 
@@ -73,7 +71,7 @@ public class SelectScreenManager : MonoBehaviour
     public void ActivatePlayer(int pid) 
     {
         playerUI[pid].SetActive(true);
-        models[pid].transform.GetChild(characterSelectIndexes[pid]).gameObject.SetActive(true);
+        models[pid].transform.GetChild(GameInfo.characterSelectIndexes[pid]).gameObject.SetActive(true);
     }
 
     public void RemovePlayer(int pid)
@@ -89,7 +87,7 @@ public class SelectScreenManager : MonoBehaviour
         playerUI[pid].SetActive(false);
         for (int i = 0; i < 4; i++)
         {
-            models[pid].transform.GetChild(characterSelectIndexes[i]).gameObject.SetActive(false);
+            models[pid].transform.GetChild(i).gameObject.SetActive(false);
         }
     }
 
@@ -105,7 +103,7 @@ public class SelectScreenManager : MonoBehaviour
         playerUI[pid].transform.GetChild(0).GetComponent<Image>().color = uiColors[pid];
 
         Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip);
-        charSFXSource.PlayOneShot(charSelectSFX[characterSelectIndexes[pid]]);
+        charSFXSource.PlayOneShot(charSelectSFX[GameInfo.characterSelectIndexes[pid]]);
         CheckAllReady();
     }
 
@@ -136,21 +134,20 @@ public class SelectScreenManager : MonoBehaviour
         if (lockState || v == 0 || playersReady[pid]) return;
 
         Camera.main.GetComponent<AudioSource>().PlayOneShot(menuArrows);
-        models[pid].transform.GetChild(characterSelectIndexes[pid]).gameObject.SetActive(false);
+        models[pid].transform.GetChild(GameInfo.characterSelectIndexes[pid]).gameObject.SetActive(false);
         
-        int newVal = characterSelectIndexes[pid] + v;
-        if (newVal > 3) characterSelectIndexes[pid] = 0;
-        else if (newVal < 0) characterSelectIndexes[pid] = 3;
-        else characterSelectIndexes[pid] = newVal;
+        int newVal = GameInfo.characterSelectIndexes[pid] + v;
+        if (newVal > 3) GameInfo.characterSelectIndexes[pid] = 0;
+        else if (newVal < 0) GameInfo.characterSelectIndexes[pid] = 3;
+        else GameInfo.characterSelectIndexes[pid] = newVal;
 
-        models[pid].transform.GetChild(characterSelectIndexes[pid]).gameObject.SetActive(true);
+        models[pid].transform.GetChild(GameInfo.characterSelectIndexes[pid]).gameObject.SetActive(true);
     }
 
     private IEnumerator StartGame()
     {
         lockState = true;
         GameInfo.playerIndices = playerIndices;
-        GameInfo.characterSelectIndexes = characterSelectIndexes;
         float timer = countdownTimer;
         while(timer > 0)
         {
@@ -158,9 +155,6 @@ public class SelectScreenManager : MonoBehaviour
             centerText.text = ((int)Mathf.Ceil(timer)).ToString();
             yield return null;
         }
-
-        GameInfo.characterSelectIndexes = characterSelectIndexes;
-        GameInfo.playerIndices = playerIndices;
 
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

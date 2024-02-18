@@ -10,6 +10,7 @@ public class Collisions : MonoBehaviour
     [SerializeField] private float dashToStunAngle;
     [SerializeField] private AudioSource quieterAS;
     [SerializeField] private AudioClip bballPickupClip;
+    [SerializeField] private AudioClip pUpPickupClip;
     private void Start()
     {
         pc = transform.root.GetComponent<PlayerController>();
@@ -36,7 +37,7 @@ public class Collisions : MonoBehaviour
         else if (other.gameObject.tag == "Powerup" && !sh.GetNextShotDoubled())
         {
             Destroy(other.gameObject);
-            quieterAS.PlayOneShot(bballPickupClip);
+            quieterAS.PlayOneShot(pUpPickupClip);
             sh.SetNextShotDoubled(true);
         }
     }

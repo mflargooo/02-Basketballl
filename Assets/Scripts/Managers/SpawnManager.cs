@@ -29,7 +29,7 @@ public class SpawnManager : MonoBehaviour
 
         for (int i = 0; i < GameInfo.playerIndices.Count; i++)
         {
-            SpawnNewPickup(new Vector3(players[i].transform.position.x, spawnCenter.position.y, players[i].transform.position.z), players[i].transform.forward * 4f);
+            SpawnNewPickup(new Vector3(players[i].transform.position.x, spawnCenter.position.y, players[i].transform.position.z), players[i].transform.forward * 6f);
             livePickupCount++;
         }
 

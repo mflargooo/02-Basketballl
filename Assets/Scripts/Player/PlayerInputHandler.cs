@@ -11,10 +11,12 @@ public class PlayerInputHandler : MonoBehaviour
     private PlayerController pc;
     private Shooting sh;
 
-    public void Setup(GameManager gm)
+    public void Awake()
     {
         pi = GetComponent<PlayerInput>();
-        pi.defaultActionMap = "Player";
+    }
+    public void Setup(GameManager gm)
+    {
         GameObject currPlayer = gm.GetPlayers()[pi.playerIndex];
         currPlayer.SetActive(true);
         pc = currPlayer.GetComponent<PlayerController>();

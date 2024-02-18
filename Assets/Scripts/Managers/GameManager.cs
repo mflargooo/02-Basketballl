@@ -72,14 +72,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void NewGame(List<int> indices)
+    public void SetClock()
     {
         GetComponent<AudioSource>().Play();
         playTenSecsLeft = false;
         endGame = false;
         gameTimer = gameTime;
-        ResetPlayers();
-        UIManager.SetupUI(indices);
     }
     private static void ResetPlayers()
     {
@@ -110,9 +108,9 @@ public class GameManager : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            if (GameInfo.playerInputObjs[3 - i])
+            if (GameInfo.playerInputObjs[i])
             {
-                GameInfo.playerInputObjs[3 - i].GetComponent<PlayerInput>().DeactivateInput();
+                GameInfo.playerInputObjs[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("UI");
             }
         }
         foreach(GameObject obj in playerUIToDisableOnEnd)
@@ -132,10 +130,19 @@ public class GameManager : MonoBehaviour
 
     IEnumerator BeginGame()
     {
-        for (int i = 0; i < 4; i++)
+        ResetPlayers();
+        UIManager.SetupUI(GameInfo.playerIndices);
+
+        foreach (int i in GameInfo.playerIndices)
         {
-            if(GameInfo.playerInputObjs[3 - i])
-                GameInfo.playerInputObjs[3 - i].SetActive(false);
+            GameObject model = players[i].transform.GetChild(1).GetChild(GameInfo.characterSelectIndexes[i]).gameObject;
+            model.SetActive(true);
+            players[i].GetComponent<PlayerController>().SetAnimator(model.GetComponent<Animator>());
+            players[i].GetComponent<Shooting>().SetAnimator(model.GetComponent<Animator>());
+            players[i].GetComponent<PlayerEffects>().SetAnimator(model.GetComponent<Animator>());
+            charSFX[i] = model.GetComponent<CharacterSoundEffects>();
+
+            GameInfo.playerInputObjs[i].GetComponent<PlayerInputHandler>().Setup(this);
         }
 
         AudioClip selected = null;
@@ -147,46 +154,15 @@ public class GameManager : MonoBehaviour
 
         yield return new WaitForSeconds(selected.length - .75f);
         
-        NewGame(GameInfo.playerIndices);
+        SetClock();
         clock.SetActive(true);
-        foreach (int i in GameInfo.playerIndices)
-        {
-            GameObject model = players[i].transform.GetChild(1).GetChild(GameInfo.characterSelectIndexes[i]).gameObject;
-            model.SetActive(true);
-            players[i].GetComponent<PlayerController>().SetAnimator(model.GetComponent<Animator>());
-            players[i].GetComponent<Shooting>().SetAnimator(model.GetComponent<Animator>());
-            players[i].GetComponent<PlayerEffects>().SetAnimator(model.GetComponent<Animator>());
-            charSFX[i] = model.GetComponent<CharacterSoundEffects>();
-        }
 
         started = true;
 
         yield return null;
-        for (int i = 0; i < 4; i++)
+        foreach (int i in GameInfo.playerIndices)
         {
-            if (GameInfo.playerInputObjs[3 - i])
-            {
-                GameInfo.playerInputObjs[3 - i].SetActive(true);
-                GameInfo.playerInputObjs[3 - i].GetComponent<PlayerInputHandler>().Setup(this);
-            }
-        }
-
-        yield return null;
-        for (int i = 0; i < 4; i++)
-        {
-            if (GameInfo.playerInputObjs[3 - i])
-            {
-                GameInfo.playerInputObjs[3 - i].SetActive(false);
-            }
-        }
-
-        yield return null;
-        for (int i = 0; i < 4; i++)
-        {
-            if (GameInfo.playerInputObjs[3 - i])
-            {
-                GameInfo.playerInputObjs[3 - i].SetActive(true);
-            }
+            GameInfo.playerInputObjs[i].GetComponent<PlayerInput>().SwitchCurrentActionMap("Player");
         }
     }
 }

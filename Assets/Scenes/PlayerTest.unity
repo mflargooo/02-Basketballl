@@ -6317,10 +6317,10 @@ MonoBehaviour:
   pickupPrefab: {fileID: 4128837787339499364, guid: 4ba018f65e687ad449e90c1e2af63d1d,
     type: 3}
   spawnCenter: {fileID: 955915078}
-  minRadius: 4
-  maxRadius: 15
+  minRadius: 3
+  maxRadius: 13
   basePickups: 3
-  addPickupsPerPlayers: 2
+  addPickupsPerPlayers: 1
   players:
   - {fileID: 6025330378167149594}
   - {fileID: 6025330378927867089}
@@ -12874,7 +12874,7 @@ Transform:
   m_GameObject: {fileID: 6025330378167149594}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.92387956, z: 0, w: 0.38268343}
-  m_LocalPosition: {x: -13, y: 1, z: 13}
+  m_LocalPosition: {x: -12, y: 1, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12892,7 +12892,7 @@ Transform:
   m_GameObject: {fileID: 6025330378927867089}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.92387956, z: 0, w: 0.38268343}
-  m_LocalPosition: {x: 13, y: 1, z: 13}
+  m_LocalPosition: {x: 12, y: 1, z: 12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12910,7 +12910,7 @@ Transform:
   m_GameObject: {fileID: 6025330378499410042}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: 13, y: 1, z: -13}
+  m_LocalPosition: {x: 12, y: 1, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -12928,7 +12928,7 @@ Transform:
   m_GameObject: {fileID: 6025330379087903563}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
-  m_LocalPosition: {x: -13, y: 1, z: -13}
+  m_LocalPosition: {x: -12, y: 1, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -13896,6 +13896,7 @@ MonoBehaviour:
   dashToStunAngle: 75
   quieterAS: {fileID: 1209798668}
   bballPickupClip: {fileID: 8300000, guid: a823bcdc0227748c4b10d2b99b9ba9e5, type: 3}
+  pUpPickupClip: {fileID: 8300000, guid: 5c4ae461d64425c4f98db5b966cd8a33, type: 3}
 --- !u!114 &7556756187552491386
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13911,6 +13912,7 @@ MonoBehaviour:
   dashToStunAngle: 75
   quieterAS: {fileID: 1209798668}
   bballPickupClip: {fileID: 8300000, guid: a823bcdc0227748c4b10d2b99b9ba9e5, type: 3}
+  pUpPickupClip: {fileID: 8300000, guid: 5c4ae461d64425c4f98db5b966cd8a33, type: 3}
 --- !u!114 &7556756188109050955
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13926,6 +13928,7 @@ MonoBehaviour:
   dashToStunAngle: 75
   quieterAS: {fileID: 1209798668}
   bballPickupClip: {fileID: 8300000, guid: a823bcdc0227748c4b10d2b99b9ba9e5, type: 3}
+  pUpPickupClip: {fileID: 8300000, guid: 5c4ae461d64425c4f98db5b966cd8a33, type: 3}
 --- !u!114 &7556756189218540314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13941,6 +13944,7 @@ MonoBehaviour:
   dashToStunAngle: 75
   quieterAS: {fileID: 1209798668}
   bballPickupClip: {fileID: 8300000, guid: a823bcdc0227748c4b10d2b99b9ba9e5, type: 3}
+  pUpPickupClip: {fileID: 8300000, guid: 5c4ae461d64425c4f98db5b966cd8a33, type: 3}
 --- !u!114 &7714726085905599345
 MonoBehaviour:
   m_ObjectHideFlags: 0
