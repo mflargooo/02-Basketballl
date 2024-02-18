@@ -18,10 +18,10 @@ public class MenuScreenWandering : MonoBehaviour
         center = transform.position;
         for (int i = 0; i < wandererPrefabs.Length; i++)
         {
-            Vector3 xOffset = Vector3.right * (Random.Range(0f, 1f) < .5 ? 1 : -1) * (Random.Range(wanderRange.x, wanderRange.x ));
-            Vector3 zOffset = Vector3.forward * (Random.Range(0f, 1f) < .5 ? 1 : -1) * (Random.Range(wanderRange.y, wanderRange.y ));
-            GameObject wanderer = Instantiate(wandererPrefabs[i], center + xOffset + zOffset, transform.rotation);
-            //GameObject wanderer = Instantiate(wandererPrefabs[i], ChooseInitialWanderPoint(), Quaternion.Euler(Vector3.up * Random.Range(0f, 360f)));
+            //Vector3 xOffset = Vector3.right * (Random.Range(0f, 1f) < .5 ? 1 : -1) * (Random.Range(wanderRange.x, wanderRange.x ));
+            //Vector3 zOffset = Vector3.forward * (Random.Range(0f, 1f) < .5 ? 1 : -1) * (Random.Range(wanderRange.y, wanderRange.y ));
+            //GameObject wanderer = Instantiate(wandererPrefabs[i], center + xOffset + zOffset, transform.rotation);
+            GameObject wanderer = Instantiate(wandererPrefabs[i], ChooseInitialWanderPoint(), transform.rotation);
             StartCoroutine(Wander(wanderer));
         }
     }
@@ -33,7 +33,9 @@ public class MenuScreenWandering : MonoBehaviour
 
     IEnumerator Wander(GameObject obj)
     {
-        Vector3 target = obj.transform.position;
+        yield return new WaitForSeconds(Random.Range(0f, .5f));
+        Vector3 target = ChooseNewWanderPoint();
+        obj.GetComponent<Animator>().SetBool("Moving", true);
 
         while (true)
         {

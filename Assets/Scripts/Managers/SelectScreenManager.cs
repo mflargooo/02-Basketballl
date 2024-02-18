@@ -52,6 +52,7 @@ public class SelectScreenManager : MonoBehaviour
             input.defaultActionMap = "UI";
             input.ActivateInput();
             ActivatePlayer(input.playerIndex);
+            Unready(input.playerIndex);
             pis[input.playerIndex] = input;
 
         }
@@ -63,6 +64,7 @@ public class SelectScreenManager : MonoBehaviour
         {
             playerIndices.Add(pid);
         }
+        quieterAudio.GetComponent<AudioSource>().PlayOneShot(joinClip);
         ActivatePlayer(pid);
         Unready(pid);
         StopCountdown();
@@ -72,7 +74,6 @@ public class SelectScreenManager : MonoBehaviour
     {
         playerUI[pid].SetActive(true);
         models[pid].transform.GetChild(characterSelectIndexes[pid]).gameObject.SetActive(true);
-        quieterAudio.GetComponent<AudioSource>().PlayOneShot(joinClip);
     }
 
     public void RemovePlayer(int pid)
