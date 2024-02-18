@@ -5,7 +5,6 @@ using UnityEngine;
 public class MenuScreenWandering : MonoBehaviour
 {
     [SerializeField] private GameObject[] wandererPrefabs;
-    //[SerializeField] private uint numWanderers;
     [SerializeField] private float wanderSpeed;
     [SerializeField] private float rotateSpeed;
     private Vector3 center;
@@ -22,7 +21,7 @@ public class MenuScreenWandering : MonoBehaviour
             //Vector3 xOffset = Vector3.right * (Random.Range(0f, 1f) < .5 ? 1 : -1) * (Random.Range(wanderRange.x, wanderRange.x ));
             //Vector3 zOffset = Vector3.forward * (Random.Range(0f, 1f) < .5 ? 1 : -1) * (Random.Range(wanderRange.y, wanderRange.y ));
             //GameObject wanderer = Instantiate(wandererPrefabs[i], center + xOffset + zOffset, transform.rotation);
-            GameObject wanderer = Instantiate(wandererPrefabs[i], ChooseInitialWanderPoint(), transform.rotation);
+            GameObject wanderer = Instantiate(wandererPrefabs[i], ChooseInitialWanderPoint(), Quaternion.Euler(Vector3.up * Random.Range(0f, 360f)));
             wanderer.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
             StartCoroutine(Wander(wanderer));
         }
@@ -39,10 +38,12 @@ public class MenuScreenWandering : MonoBehaviour
 
         while (true)
         {
-            if ((target - obj.transform.position).magnitude <= .1f)
+            if ((target - obj.transform.position).magnitude <= .2f)
             {
+                obj.GetComponent<Animator>().SetBool("Moving", false);
                 target = ChooseNewWanderPoint();
                 yield return new WaitForSeconds(Random.Range(minWaitTime, maxWaitTime));
+                obj.GetComponent<Animator>().SetBool("Moving", true);
 
             }
             else

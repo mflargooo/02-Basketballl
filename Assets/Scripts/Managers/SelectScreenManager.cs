@@ -103,7 +103,7 @@ public class SelectScreenManager : MonoBehaviour
     {
         playersReady[pid] = false;
         playerUI[pid].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Ready?";
-        playerUI[pid].transform.GetChild(0).GetComponent<Image>().color = uiColors[pid] * .75f;
+        playerUI[pid].transform.GetChild(0).GetComponent<Image>().color = uiColors[pid] * .25f;
 
         StopCountdown();
     }
