@@ -86,9 +86,17 @@ public class UIManager : MonoBehaviour
             {
                 int placement = GameManager.GetNumPlayers() - playersSet + 1;
                 GameManager.ps[spid].placement = placement;
-                TMP_Text placementText = pi[spid].transform.GetChild(2).GetComponent<TMP_Text>();
+                TMP_Text placementText = pi[spid].transform.GetChild(3).GetComponent<TMP_Text>();
+                TMP_Text wordEnding = pi[spid].transform.GetChild(2).GetComponent<TMP_Text>();
+
+                if (placement == 1) wordEnding.text = "st";
+                else if (placement == 2) wordEnding.text = "nd";
+                else if (placement == 3) wordEnding.text = "rd";
+                else /* placement == 4 */ wordEnding.text = "th";
+
                 placementText.text = placement.ToString();
                 placementText.color = pc[GameManager.GetNumPlayers() - playersSet];
+                wordEnding.color = pc[GameManager.GetNumPlayers() - playersSet];
             }
         }
     }

@@ -26,17 +26,14 @@ public class Collisions : MonoBehaviour
                 other.gameObject.GetComponent<Stealing>().stealing(transform.root.gameObject);
             }
         }
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag == "Egg" && GameManager.ps[pc.GetPlayerID()].GetComponent<PlayerStats>().eggCt < GameManager.GetMaxEggCount())
+        else if (other.gameObject.tag == "Egg" && GameManager.ps[pc.GetPlayerID()].GetComponent<PlayerStats>().eggCt < GameManager.GetMaxEggCount())
         {
             Destroy(other.transform.root.gameObject);
             quieterAS.PlayOneShot(bballPickupClip);
             GameManager.ps[pc.GetPlayerID()].eggCt++;
             UIManager.UpdateEggs(pc.GetPlayerID(), GameManager.ps[pc.GetPlayerID()].eggCt);
         }
-        else if(other.gameObject.tag == "Powerup" && !sh.GetNextShotDoubled())
+        else if (other.gameObject.tag == "Powerup" && !sh.GetNextShotDoubled())
         {
             Destroy(other.gameObject);
             quieterAS.PlayOneShot(bballPickupClip);

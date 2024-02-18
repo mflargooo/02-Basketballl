@@ -27,6 +27,7 @@ public class SelectScreenManager : MonoBehaviour
     [SerializeField] private AudioClip readyClip;
     [SerializeField] private AudioClip joinClip;
     [SerializeField] private AudioSource quieterAudio;
+    [SerializeField] private AudioSource charSFXSource;
 
     private void Start()
     {
@@ -81,11 +82,14 @@ public class SelectScreenManager : MonoBehaviour
         if (playersReady[pid]) return;
 
         playersReady[pid] = true;
-        playerUI[pid].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Ready!";
+        playerUI[pid].transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        playerUI[pid].transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        playerUI[pid].transform.GetChild(1).gameObject.SetActive(false);
+        playerUI[pid].transform.GetChild(2).gameObject.SetActive(false);
         playerUI[pid].transform.GetChild(0).GetComponent<Image>().color = uiColors[pid];
 
         Camera.main.GetComponent<AudioSource>().PlayOneShot(readyClip);
-        Camera.main.GetComponent<AudioSource>().PlayOneShot(charSelectSFX[characterSelectIndexes[pid]]);
+        charSFXSource.PlayOneShot(charSelectSFX[characterSelectIndexes[pid]]);
         CheckAllReady();
     }
 
@@ -102,7 +106,10 @@ public class SelectScreenManager : MonoBehaviour
     public void Unready(int pid)
     {
         playersReady[pid] = false;
-        playerUI[pid].transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = "Ready?";
+        playerUI[pid].transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        playerUI[pid].transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+        playerUI[pid].transform.GetChild(1).gameObject.SetActive(true);
+        playerUI[pid].transform.GetChild(2).gameObject.SetActive(true);
         playerUI[pid].transform.GetChild(0).GetComponent<Image>().color = uiColors[pid] * .25f;
 
         StopCountdown();

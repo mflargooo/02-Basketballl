@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Destroy(GameObject.Find("BackgroundMusic"));
         started = false;
         charSFX = new CharacterSoundEffects[4];
         gameTime += .9999f;
@@ -73,6 +74,7 @@ public class GameManager : MonoBehaviour
 
     public void NewGame(List<int> indices)
     {
+        GetComponent<AudioSource>().Play();
         playTenSecsLeft = false;
         endGame = false;
         gameTimer = gameTime;
