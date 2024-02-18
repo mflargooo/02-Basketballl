@@ -24,7 +24,7 @@ public class ScoreManager : MonoBehaviour
         rings[1].transform.localScale = new Vector3(medRingRadius * 2f, medRingRadius * 2f, 1f);
         rings[2].transform.localScale = new Vector3(largeRingRadius * 2f, largeRingRadius * 2f, 1f);
 
-        shootingRanges = new float[3] { smallRingRadius - .125f, medRingRadius - .125f, largeRingRadius};
+        shootingRanges = new float[3] { smallRingRadius, medRingRadius, largeRingRadius};
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -34,9 +34,9 @@ public class ScoreManager : MonoBehaviour
             int pts = 0;
             float dist = ball.GetStartDistance();
 
-            if (dist < smallRingRadius - .125f)
+            if (dist < smallRingRadius - .25f)
                 pts = 1;
-            else if (dist < medRingRadius - .125f)
+            else if (dist < medRingRadius - .25f)
                 pts = 2;
             else if (dist < largeRingRadius + .25f)
                 pts = 3;
