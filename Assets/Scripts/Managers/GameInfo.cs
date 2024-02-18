@@ -16,7 +16,6 @@ public class GameInfo : MonoBehaviour
     public static GameInfo instance {get ; private set; }
     public void Awake()
     {
-        for (int i = 0; i < 4; i++) characterSelectIndexes[i] = 0;
         if(instance != null && instance != this)
         {
             Destroy(this);
