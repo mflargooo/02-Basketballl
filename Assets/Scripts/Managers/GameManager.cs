@@ -122,12 +122,11 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(.1f);
 
 
-        GameInfo.placementsLastToFirst = UIManager.GetPlacements();
-
         quieterAS.PlayOneShot(whistleClip);
         yield return new WaitForSeconds(3f);
 
         GameInfo.isRematch = true;
+        GameInfo.placementsLastToFirst = UIManager.GetPlacements();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

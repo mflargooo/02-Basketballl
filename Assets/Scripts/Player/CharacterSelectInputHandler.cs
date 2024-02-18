@@ -11,7 +11,9 @@ public class CharacterSelectInputHandler : MonoBehaviour
     private SelectScreenManager ssm;
 
     private bool hasIncred;
-    private bool hasDecred;        
+    private bool hasDecred;
+
+    private bool canReady;
 
     private void Awake()
     {
@@ -21,6 +23,8 @@ public class CharacterSelectInputHandler : MonoBehaviour
         ssm = FindObjectOfType<SelectScreenManager>();
         ssm.AddPlayer(pi.playerIndex);
         GameInfo.playerInputObjs[pi.playerIndex] = gameObject;
+
+        StartCoroutine(ReadyCooldown());
     }
 
     private void OnLevelWasLoaded(int level)
@@ -49,7 +53,7 @@ public class CharacterSelectInputHandler : MonoBehaviour
 
     public void Ready(CallbackContext context)
     {
-        if(ssm && context.ReadValue<float>() > 0)
+        if(ssm && context.ReadValue<float>() > 0 && canReady)
             ssm.Ready(pi.playerIndex);
     }
     
@@ -75,5 +79,11 @@ public class CharacterSelectInputHandler : MonoBehaviour
         ssm.Ready(pi.playerIndex);
         ssm.AddPlayer(pi.playerIndex);
         GameInfo.playerInputObjs[pi.playerIndex] = gameObject;
+    }
+
+    IEnumerator ReadyCooldown()
+    {
+        yield return null;
+        canReady = true;
     }
 }

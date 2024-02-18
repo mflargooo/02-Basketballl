@@ -114,6 +114,7 @@ public class Shooting : MonoBehaviour
     void ShootAt()
     {
         Projectile ball = Instantiate(ballPrefab, transform.position + transform.forward, transform.rotation).GetComponent<Projectile>();
+        Destroy(ball.transform.GetChild(1).gameObject);
         ball.LaunchAt(GameManager.ps[playerID].id, scoreZone.position, shootPower);
         ball.SetNextShotDoubled(nextShotDoubled);
         nextShotDoubled = false;
@@ -122,6 +123,7 @@ public class Shooting : MonoBehaviour
     void ShootMiss()
     {
         Projectile ball = Instantiate(ballPrefab, transform.position + transform.forward, transform.rotation).GetComponent<Projectile>();
+        Destroy(ball.transform.GetChild(1).gameObject);
         float angle = Random.Range(0f, 360f);
         Vector3 offset = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * 2f;
         ball.LaunchAt(GameManager.ps[playerID].id, scoreZone.position + offset, shootPower);

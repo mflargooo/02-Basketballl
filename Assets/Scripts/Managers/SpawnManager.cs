@@ -51,7 +51,9 @@ public class SpawnManager : MonoBehaviour
         float dist = Random.Range(minRadius, maxRadius);
         Vector3 spawnPos = new Vector3(Mathf.Cos(angle), 0f, Mathf.Sin(angle)) * dist + center;
 
-        return Instantiate(obj, spawnPos, transform.rotation);
+        GameObject instance = Instantiate(obj, spawnPos, transform.rotation);
+        if (instance.name.Contains("Ball")) instance.GetComponent<Animator>().Play("BallSpawn");
+        return instance;
     }
 
     /* from is start position, to is displacement */
