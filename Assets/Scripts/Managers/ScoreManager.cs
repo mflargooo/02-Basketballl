@@ -34,9 +34,9 @@ public class ScoreManager : MonoBehaviour
             int pts = 0;
             float dist = ball.GetStartDistance();
 
-            if (dist < smallRingRadius - .5f)
+            if (dist < smallRingRadius - 1f)
                 pts = 1;
-            else if (dist < medRingRadius - .5f)
+            else if (dist < medRingRadius - 1f)
                 pts = 2;
             else if (dist < largeRingRadius + .5f)
                 pts = 3;
