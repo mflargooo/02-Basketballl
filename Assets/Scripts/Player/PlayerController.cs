@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private AudioClip dashClip;
     [SerializeField] private GameObject dashParticles;
     [SerializeField] private AudioSource dashAS;
+    [SerializeField] private AudioSource ftstpsAS;
 
     private Rigidbody rb;
 
@@ -36,7 +37,17 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (input.magnitude > 0 && !isDashing && !ftstpsAS.isPlaying)
+        {
+            ftstpsAS.Play();
+        }
+        else if ((!canMove || input.magnitude == 0 || isDashing) && ftstpsAS.isPlaying)
+        {
+            ftstpsAS.Stop();
+        }
+
         anim.SetFloat("Input", input.magnitude);
+ 
         if (dct > 0f && !isDashing)
         {
             dct -= Time.deltaTime;
@@ -51,7 +62,10 @@ public class PlayerController : MonoBehaviour
         }
         else rb.transform.Rotate(Vector3.zero);
 
-        if(!isDashing) rb.velocity = input.normalized * moveSpeed;
+        if (!isDashing)
+        {
+            rb.velocity = input.normalized * moveSpeed;
+        }
         anim.SetFloat("Velocity", rb.velocity.magnitude);
     }
 
