@@ -2,7 +2,7 @@
 
 README
 
-        "Bunny Ball" developed by Hidden Reflection Studios, a basketball inspired free-for-all highscore party game.
+        "Bunny Ball" developed by Hidden Reflection Studios, a basketball-inspired free-for-all, highscore, party game.
 
 RUN DIRECTIONS
 
@@ -18,7 +18,7 @@ RELEASE NOTES
                 - Created basic level layout and designated shooting ranges.
                 - Created placeholder UI and UI functionality to track player statistics.
 
-        () Final Build - Version 2
+        () Iterim Build - Version 2
                 
                 - Additions:
                         - Added controller support for up to 2-4 players.
@@ -39,6 +39,18 @@ RELEASE NOTES
                                 - Varying difficulty for different shots.
                         - Players now invulnerable within small ring (safety from steals).
 
+        () Final Build - Version 3
+
+                + Added purple egg power-up
+                        - Doubles the score of your next shot
+                + Updated SFX and particle effect for various actions
+                + Revamped player SFX
+                + Updated main menu, player select, in-game, and win screen UI
+                + Updated player models with textures and enlarged head
+                + Added intro sequence for playfield
+                + Increased size of shooting rings
+                + Limited max ball count to 1
+                + Fixed issues with controller ordering
 
 ATTRIBUTIONS 
 
@@ -46,6 +58,10 @@ ATTRIBUTIONS
                 
                 - "Numb Bunny" by KineticPlasma Fonts : https://www.dafont.com/numbbunny.font
                 - "ARCO" by Rafael Olivo : https://www.dafont.com/arco.font
+                - "Mister Froggie" by Din Studio: https://www.dafont.com/mister-froggie.font?text=Freaky+Frogs
+                - "Burrito" from dafont.com: https://www.dafont.com/burrito.font?text=Crushed+Chili+Peppers
+                - "Blackbird" by Kong Font: https://www.dafont.com/blackbird.font?text=Blue+Jays
+                - "Lemon Juice" by Asd Studio: https://www.dafont.com/lemon-juice.font
 
         () Sound References: 
                 
@@ -55,6 +71,7 @@ ATTRIBUTIONS
                 - "Item Sparkle" by Mr._Fritz_: https://freesound.org/people/Mr._Fritz_/sounds/545238/
                 - "Error" by BloodPixelHero: https://freesound.org/people/BloodPixelHero/sounds/572936/
                 - "Whistle" by Robinhood76: https://freesound.org/people/Robinhood76/sounds/692545/
+                - "Cute Walk/Run A1" by FxKid2: https://freesound.org/people/FxKid2/sounds/362610/
                 
                 Audio recorded and mixed in Pro Tools and Cubase.
 
@@ -67,5 +84,19 @@ ATTRIBUTIONS
                 - Seamless grass by mbrockwell: https://www.deviantart.com/mbrockwell/art/seamless-cartoon-grass-texture-201505192
                 - Wicker basket from SketchUpTextureClub: https://www.sketchuptextureclub.com/textures/nature-elements/rattan-wicker/wicker-woven-basket-texture-seamless-12600
                 - Basketball by orangereebok: https://www.vecteezy.com/vector-art/135839-basketball-texture-free-vector 
+                - "Happy cartoon Mexican chili peppers" by Memoangeles: https://stock.adobe.com/search/images?k=chili+pepper+cartoon&asset_id=169848269
+                - "Cartoon frog clipart" by mathafix: https://creazilla.com/nodes/15029-cartoon-frog-clipart
+                - "Blue Jay" by Butler Acres Elementary School: https://www.kelso.wednet.edu/o/butler-acres/article/813350
+                - "Cartoon Lemon" by muhamad khanif: https://www.vecteezy.com/vector-art/7956581-cartoon-lemon-art-vector-fresh-lemon-fruits-on-summer-season-summer-fruit
+                - "Twinkle Chimes" by everythingsounds: https://freesound.org/people/everythingsounds/sounds/621784/
+                - "Football Crowd - Goal Cheer -..." by Quistard: https://freesound.org/people/Quistard/sounds/237679/
+
+        () Videos:
+                - "Welcome to Carnegie Mellon, Class of 2027" by CMU: https://www.youtube.com/watch?v=FiwRAB5A2oc&t=4s&ab_channel=CarnegieMellonUniversity
+                
+        () Figma Plug-ins:
+
+                - Image tracer by Dave Williames
+                - Glow by Alex Widua
 
         () Rig and various animations from https://www.mixamo.com/
